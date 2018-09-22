@@ -12,9 +12,20 @@ namespace Farfetch.Infra.Data.Imp.Contexts
         }
 
         public DbSet<Toggle> Toggle { get; set; }
-        
+        public DbSet<ServiceRota> ServiceRota { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<Toggle>()
+            //       .HasMany<ServiceRota>(t => t.Rotas)
+            //       .WithMany(c => c.Toggles)
+            //       .Map(cs =>
+            //       {
+            //           cs.MapLeftKey("ToggleId");
+            //           cs.MapRightKey("ServiceRotaId");
+            //           cs.ToTable("TogglesServiceRotas");
+            //       });
+
             modelBuilder.Entity(ToggleMapConfig.ConfigureMap());
         }
     }

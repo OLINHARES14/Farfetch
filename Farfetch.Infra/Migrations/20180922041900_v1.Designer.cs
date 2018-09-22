@@ -4,14 +4,16 @@ using Farfetch.Infra.Data.Imp.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Farfetch.Infra.Migrations
 {
     [DbContext(typeof(DbContextFarfetch))]
-    partial class DbContextFarfetchModelSnapshot : ModelSnapshot
+    [Migration("20180922041900_v1")]
+    partial class v1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

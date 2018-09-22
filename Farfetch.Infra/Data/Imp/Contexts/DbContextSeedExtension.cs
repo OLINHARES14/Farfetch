@@ -6,6 +6,7 @@ namespace Farfetch.Infra.Data.Imp.Contexts
     {
         public static void EnsureSeeded(this DbContextFarfetch context)
         {
+            SeedServiceRota.InsertData(context);
             SeedToogle.InsertData(context);
         }
     }

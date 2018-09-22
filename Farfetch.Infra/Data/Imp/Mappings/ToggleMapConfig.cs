@@ -10,7 +10,8 @@ namespace Farfetch.Infra.Data.Imp.Mappings
         {
             entity.Property(ti => ti.Description)
             .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(100)            
+            ;            
         };
     }
 }

@@ -7,5 +7,6 @@ namespace Farfetch.Domain.Services.Contracts.Infra.Data.Contexts
     public interface IDbContextFarfetch : IDbContext
     {
         DbSet<Toggle> Toggle { get; set; }
+        DbSet<ServiceRota> ServiceRota { get; set; }
     }
 }
