@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Configurations\MvcOptionsConfigurations.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="AppData\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

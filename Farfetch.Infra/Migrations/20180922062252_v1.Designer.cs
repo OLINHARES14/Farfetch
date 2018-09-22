@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Farfetch.Infra.Migrations
 {
     [DbContext(typeof(DbContextFarfetch))]
-    [Migration("20180922041900_v1")]
+    [Migration("20180922062252_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,27 @@ namespace Farfetch.Infra.Migrations
                 .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Farfetch.Domain.Models.Entities.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<int?>("RotaId");
+
+                    b.Property<int?>("TogleId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RotaId");
+
+                    b.HasIndex("TogleId");
+
+                    b.ToTable("Order");
+                });
 
             modelBuilder.Entity("Farfetch.Domain.Models.Entities.ServiceRota", b =>
                 {
@@ -36,6 +57,27 @@ namespace Farfetch.Infra.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ServiceRota");
+                });
+
+            modelBuilder.Entity("Farfetch.Domain.Models.Entities.ServiceRotaToggle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active");
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<string>("Rota");
+
+                    b.Property<int?>("ToggleId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ToggleId");
+
+                    b.ToTable("ServiceRotaToggle");
                 });
 
             modelBuilder.Entity("Farfetch.Domain.Models.Entities.Toggle", b =>
@@ -76,6 +118,24 @@ namespace Farfetch.Infra.Migrations
                     b.HasIndex("ToggleId");
 
                     b.ToTable("ToggleServiceRota");
+                });
+
+            modelBuilder.Entity("Farfetch.Domain.Models.Entities.Order", b =>
+                {
+                    b.HasOne("Farfetch.Domain.Models.Entities.ServiceRota", "Rota")
+                        .WithMany()
+                        .HasForeignKey("RotaId");
+
+                    b.HasOne("Farfetch.Domain.Models.Entities.Toggle", "Togle")
+                        .WithMany()
+                        .HasForeignKey("TogleId");
+                });
+
+            modelBuilder.Entity("Farfetch.Domain.Models.Entities.ServiceRotaToggle", b =>
+                {
+                    b.HasOne("Farfetch.Domain.Models.Entities.Toggle", "Toggle")
+                        .WithMany()
+                        .HasForeignKey("ToggleId");
                 });
 
             modelBuilder.Entity("Farfetch.Domain.Models.Entities.ToggleServiceRota", b =>

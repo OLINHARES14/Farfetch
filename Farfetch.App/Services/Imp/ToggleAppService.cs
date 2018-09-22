@@ -17,7 +17,7 @@ namespace Farfetch.App.Services.Imp
             ToggleServiceTask = toggleServiceTask;
         }
 
-        public async Task<HttpResult<ToggleMessageResponse>> Create(CreateToggleMessageRequest request)
+        public async Task<HttpResult<ToggleMessageResponse>> Create(ToggleCreateMessageRequest request)
         {
             var retorno = new HttpResult<ToggleMessageResponse>();
 
@@ -61,7 +61,7 @@ namespace Farfetch.App.Services.Imp
             return retorno;
         }
 
-        public async Task<HttpResult<ToggleMessageResponse>> Update(int id, UpdateToggleMessageRequest request)
+        public async Task<HttpResult<ToggleMessageResponse>> Update(int id, ToggleUpdateMessageRequest request)
         {
             var retorno = new HttpResult<ToggleMessageResponse>();
 

@@ -6,7 +6,7 @@ namespace Farfetch.App.Mapper
 {
     public class MapToModelToggle
     {
-        public static Toggle MapToModel(CreateToggleMessageRequest request)
+        public static Toggle MapToModel(ToggleCreateMessageRequest request)
         {
             if (request == null) return new Toggle();
 
@@ -19,7 +19,7 @@ namespace Farfetch.App.Mapper
             };
         }
 
-        public static Toggle MapToModel(UpdateToggleMessageRequest request)
+        public static Toggle MapToModel(ToggleUpdateMessageRequest request)
         {
             if (request == null) return new Toggle();
 

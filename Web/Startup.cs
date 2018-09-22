@@ -23,14 +23,14 @@ namespace Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureAppSettingsOptions(Configuration);
-
+            
             services.AddMvc().AddJsonOptions(options =>
             options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             services.AddAutoMapperSetup(Configuration);
             services.ConfigureDbContext(Configuration);
             services.ConfigureDI(Configuration);
-
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

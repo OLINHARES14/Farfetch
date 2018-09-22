@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Farfetch.App.Messages
 {
     [DataContract]
-    public class UpdateToggleMessageRequest
+    public class ToggleUpdateMessageRequest
     {
         [DataMember(Name = "description")]
         [Required(ErrorMessage = "Campo obrigatório")]

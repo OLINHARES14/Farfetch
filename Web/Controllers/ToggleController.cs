@@ -19,7 +19,7 @@ namespace Web.Controllers
         }
 
         [HttpPost()]
-        public async Task<HttpResult<ToggleMessageResponse>> Create([FromBody] CreateToggleMessageRequest request)
+        public async Task<HttpResult<ToggleMessageResponse>> Create([FromBody] ToggleCreateMessageRequest request)
         {
             return await ToggleAppService.Create(request);
         }
@@ -37,7 +37,7 @@ namespace Web.Controllers
         }
 
         [HttpPost("{id}")]
-        public async Task<HttpResult<ToggleMessageResponse>> Update(int id, [FromBody] UpdateToggleMessageRequest request)
+        public async Task<HttpResult<ToggleMessageResponse>> Update(int id, [FromBody] ToggleUpdateMessageRequest request)
         {
             return await ToggleAppService.Update(id, request);
         }

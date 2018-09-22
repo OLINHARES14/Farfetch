@@ -40,6 +40,55 @@ namespace Farfetch.Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Order",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    TogleId = table.Column<int>(nullable: true),
+                    RotaId = table.Column<int>(nullable: true),
+                    CreationDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Order_ServiceRota_RotaId",
+                        column: x => x.RotaId,
+                        principalTable: "ServiceRota",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Order_Toggle_TogleId",
+                        column: x => x.TogleId,
+                        principalTable: "Toggle",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ServiceRotaToggle",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Rota = table.Column<string>(nullable: true),
+                    Active = table.Column<bool>(nullable: false),
+                    ToggleId = table.Column<int>(nullable: true),
+                    CreationDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceRotaToggle", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ServiceRotaToggle_Toggle_ToggleId",
+                        column: x => x.ToggleId,
+                        principalTable: "Toggle",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ToggleServiceRota",
                 columns: table => new
                 {
@@ -66,6 +115,21 @@ namespace Farfetch.Infra.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Order_RotaId",
+                table: "Order",
+                column: "RotaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_TogleId",
+                table: "Order",
+                column: "TogleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServiceRotaToggle_ToggleId",
+                table: "ServiceRotaToggle",
+                column: "ToggleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ToggleServiceRota_RotaId",
                 table: "ToggleServiceRota",
                 column: "RotaId");
@@ -78,6 +142,12 @@ namespace Farfetch.Infra.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Order");
+
+            migrationBuilder.DropTable(
+                name: "ServiceRotaToggle");
+
             migrationBuilder.DropTable(
                 name: "ToggleServiceRota");
 

@@ -7,10 +7,10 @@ namespace Farfetch.App.Services.Contracts
 {
     public interface IToggleAppService
     {
-        Task<HttpResult<ToggleMessageResponse>> Create(CreateToggleMessageRequest request);
+        Task<HttpResult<ToggleMessageResponse>> Create(ToggleCreateMessageRequest request);
         Task<HttpResult<List<ToggleMessageResponse>>> GetAll();
         Task<HttpResult<ToggleMessageResponse>> Get(int id);
-        Task<HttpResult<ToggleMessageResponse>> Update(int id, UpdateToggleMessageRequest request);
+        Task<HttpResult<ToggleMessageResponse>> Update(int id, ToggleUpdateMessageRequest request);
         Task<HttpResult<ToggleMessageResponse>> Delete(int id);
     }
 }

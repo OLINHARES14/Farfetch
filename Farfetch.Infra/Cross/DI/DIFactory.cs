@@ -28,18 +28,26 @@ namespace Farfetch.Infra.Cross.DI
             services.AddScoped<IDbContextFarfetch, DbContextFarfetch>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddScoped<IToggleRepository, ToggleRepository>();            
+            services.AddScoped<IToggleRepository, ToggleRepository>();
+            services.AddScoped<IServiceRotaToggleRepository, ServiceRotaToggleRepository>();
         }
 
         private static void ConfigureApplicationServices(IServiceCollection services)
         {
             services.AddScoped<IToggleAppService, ToggleAppService>();
+            services.AddScoped<IServiceRotaToggleAppService, ServiceRotaToggleAppService>();
+            services.AddScoped<IOrderAppService, OrderAppService>();
         }
 
         private static void ConfigureDomainServices(IServiceCollection services)
         {   
             services.AddScoped<IToggleServiceTask, ToggleServiceTask>();
             services.AddScoped<IToggleEntityService, ToggleEntityService>();
+
+            services.AddScoped<IServiceRotaToggleServiceTask, ServiceRotaToggleServiceTask>();
+            services.AddScoped<IServiceRotaToggleEntityService, ServiceRotaToggleEntityService>();
+
+            services.AddScoped<IOrderServiceTask, OrderServiceTask>();
         }
     }
 }
