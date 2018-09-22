@@ -4,10 +4,10 @@ using System.Runtime.Serialization;
 namespace Farfetch.App.Messages
 {
     [DataContract]
-    public class OrderRegisterMessageRequest
+    public class OrderRegisterMessageRequest : BaseRequest
     {
-        [DataMember(Name = "rota")]
+        [DataMember(Name = "descriptionProduto")]
         [Required(ErrorMessage = "Campo obrigatório")]
-        public string Rota { get; set; }
+        public string DescriptionProduto { get; set; }
     }
 }

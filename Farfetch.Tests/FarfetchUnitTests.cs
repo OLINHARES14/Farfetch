@@ -15,24 +15,26 @@ namespace Farfetch.Tests
 {
     public class FarfetchUnitTests
     {        
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IToggleEntityService _toggleEntityService;
+        private IUnitOfWork UnitOfWork { get; }
+        private IToggleEntityService ToggleEntityService { get; }
+        private IServiceRotaEntityService ServiceRotaEntityService { get; }
 
         ToggleServiceTask task;
 
         public FarfetchUnitTests()
         {
-            _unitOfWork = Substitute.For<IUnitOfWork>();
-            _toggleEntityService = Substitute.For<IToggleEntityService>();
-            
-            task = new ToggleServiceTask(_unitOfWork, _toggleEntityService);
+            UnitOfWork = Substitute.For<IUnitOfWork>();
+            ToggleEntityService = Substitute.For<IToggleEntityService>();
+            ServiceRotaEntityService = Substitute.For<IServiceRotaEntityService>();
+
+            task = new ToggleServiceTask(UnitOfWork, ToggleEntityService, ServiceRotaEntityService);
         }
 
         #region [ Tasks ]
 
         private HttpResult<Toggle> Create(Toggle toggle)
         {   
-            return task.Create(toggle);
+            return task.Create(toggle, null); //TODO: Verificar Ids
         }
 
         private Task<HttpResult<List<Toggle>>> GetAll()
@@ -47,7 +49,7 @@ namespace Farfetch.Tests
 
         private Task<HttpResult<Toggle>> Update(int id, string description, bool flag)
         {
-            return task.Update(id, description, flag);
+            return task.Update(id, description, flag, null); ; //TODO: Verificar Ids
         }
 
         private Task<HttpResult<Toggle>> Delete(int id)

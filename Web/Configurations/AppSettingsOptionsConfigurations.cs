@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Web.Filters;
 
 namespace Web.Configurations
 {
@@ -17,7 +18,7 @@ namespace Web.Configurations
 
         public static IServiceCollection ConfigureAppSettingsOptions(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddOptions();            
+            services.AddOptions();
 
             return services;
         }

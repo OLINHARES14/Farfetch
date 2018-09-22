@@ -10,8 +10,8 @@ namespace Farfetch.App.Messages
         [Required(ErrorMessage = "Campo obrigatório")]
         public string Rota { get; set; }
 
-        //[DataMember(Name = "flag")]
-        //[Required(ErrorMessage = "Campo obrigatório")]
-        //public bool Flag { get; set; }
+        [DataMember(Name = "toggleId")]
+        [Required(ErrorMessage = "Campo obrigatório")]
+        public int ToggleId { get; set; }
     }
 }

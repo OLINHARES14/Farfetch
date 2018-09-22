@@ -1,4 +1,6 @@
-﻿using System.Runtime.Serialization;
+﻿using Farfetch.Domain.Models.Entities;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Farfetch.App.Messages
 {
@@ -16,5 +18,8 @@ namespace Farfetch.App.Messages
 
         [DataMember(Name = "active")]
         public bool Active { get; set; }
+
+        [DataMember(Name = "serviceRotas")]
+        public List<ServiceRota> ServiceRotas { get; set; }
     }
 }

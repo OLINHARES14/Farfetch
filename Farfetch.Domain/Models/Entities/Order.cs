@@ -7,8 +7,13 @@ namespace Farfetch.Domain.Models.Entities
     {
         [Key]
         public int Id { get; set; }
-        public Toggle Togle { get; set; }
-        public ServiceRota Rota { get; set; }        
-        public DateTime CreationDate { get; set; }
+
+        public string Protocol { get; set; }
+
+        public string DescriptionToggle { get; set; }
+        
+        public string DescriptionServiceRota { get; set; }
+
+        public string DescriptionProduto { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Farfetch.App.Messages;
 using Farfetch.Domain.Models.Entities;
-using System;
 
 namespace Farfetch.App.Mapper
 {
@@ -12,10 +11,7 @@ namespace Farfetch.App.Mapper
 
             return new ServiceRotaToggle
             {
-                //Description = request.Description,
-                //Flag = request.Flag,
                 Active = true,
-                CreationDate = DateTime.Now
             };
         }
 
@@ -25,8 +21,7 @@ namespace Farfetch.App.Mapper
 
             return new ServiceRotaToggle
             {
-                Rota = request.Rota,
-                //Flag = request.Flag
+                Rota = request.Rota
             };
         }
     }

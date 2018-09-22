@@ -3,11 +3,8 @@ using Farfetch.Domain.Models.Entities;
 using Farfetch.Domain.Services.Contracts.Entities;
 using Farfetch.Domain.Services.Contracts.Infra.Data.UoW;
 using Farfetch.Domain.Services.Imp.Tasks;
-using Farfetch.Infra.Cross.Helpers;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
-using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
@@ -17,24 +14,26 @@ namespace Farfetch.Tests
 {
     public class FarfetchIntegrationTests
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IToggleEntityService _toggleEntityService;
+        private IUnitOfWork UnitOfWork { get; }
+        private IToggleEntityService ToggleEntityService { get;  }
+        private IServiceRotaEntityService ServiceRotaEntityService { get; }
 
         ToggleServiceTask task;
 
         public FarfetchIntegrationTests()
         {
-            _unitOfWork = Substitute.For<IUnitOfWork>();
-            _toggleEntityService = Substitute.For<IToggleEntityService>();
+            UnitOfWork = Substitute.For<IUnitOfWork>();
+            ToggleEntityService = Substitute.For<IToggleEntityService>();
+            ServiceRotaEntityService = Substitute.For<IServiceRotaEntityService>();
 
-            task = new ToggleServiceTask(_unitOfWork, _toggleEntityService);
+            task = new ToggleServiceTask(UnitOfWork, ToggleEntityService, ServiceRotaEntityService);
         }
 
         #region [ Tasks ]
 
         private HttpResult<Toggle> Create(Toggle toggle)
         {
-            return task.Create(toggle);
+            return task.Create(toggle, null); //TODO: Verificar os ids
         }
 
         private Task<HttpResult<List<Toggle>>> GetAll()
@@ -49,7 +48,7 @@ namespace Farfetch.Tests
 
         private Task<HttpResult<Toggle>> Update(int id, string description, bool flag)
         {
-            return task.Update(id ,description, flag);
+            return task.Update(id ,description, flag, null); //TODO: Verificar os ids
         }
 
         private Task<HttpResult<Toggle>> Delete(int id)

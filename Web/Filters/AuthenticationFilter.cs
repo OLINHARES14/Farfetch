@@ -6,24 +6,38 @@ using System.Threading.Tasks;
 
 namespace Web.Filters
 {
-    public class ToggleAuthorizeFilter : Attribute, IActionFilter//ActionFilterAttribute //IAsyncActionFilter //ActionFilterAttribute
+    public class AuthenticationFilter : Attribute, IAsyncActionFilter
     {
-        public void OnActionExecuted(ActionExecutedContext context)
+        //public void OnActionExecuting(ActionExecutingContext context)
+        //{
+        //    string protocol = ObterOuGerarProtocoloRequisicao(context);
+        //}
+
+        public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            throw new NotImplementedException();
+            string protocol = context.HttpContext.Request.Headers["Protocol"].ToString();
+
+            if (string.IsNullOrWhiteSpace(protocol))
+            {
+                protocol = Guid.NewGuid().ToString();
+                context.HttpContext.Request.Headers.Add("Protocol", protocol);
+            }
+
+            await next();
         }
 
-        public void OnActionExecuting(ActionExecutingContext context)
-        {
-            var rota = context.ActionArguments.Values.Where(v => v is "Rota").SingleOrDefault();
+        //private string ObterOuGerarProtocoloRequisicao(ActionExecutingContext context)
+        //{
+        //    string protocol = context.HttpContext.Request.Headers["Protocol"].ToString();
 
-            //object param;
+        //    if (string.IsNullOrWhiteSpace(protocol))
+        //    {
+        //        protocol = Guid.NewGuid().ToString();
+        //        context.HttpContext.Request.Headers.Add("Protocol", protocol);
+        //    }
 
-            //if (
-            //    context.ActionArguments["rota"] = param.ToString().ToUpper();
-            //else
-            //    context.ActionArguments.Add("rota", "I come from action filter");
-        }
+        //    return protocol;
+        //}
 
         /// <summary>
         /// Chamada async antes que o método da action seja executada

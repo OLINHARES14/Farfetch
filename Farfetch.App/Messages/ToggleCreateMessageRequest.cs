@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace Farfetch.App.Messages
@@ -13,5 +14,9 @@ namespace Farfetch.App.Messages
         [DataMember(Name = "flag")]
         [Required(ErrorMessage = "Campo obrigatório")]
         public bool Flag { get; set; }
+
+        [DataMember(Name = "idsServiceRota")]
+        [Required(ErrorMessage = "Campo obrigatório")]
+        public List<int> IdsServiceRota { get; set; }
     }
 }

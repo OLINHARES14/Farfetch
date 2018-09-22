@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Farfetch.Infra.Migrations
 {
     [DbContext(typeof(DbContextFarfetch))]
-    [Migration("20180922062252_v1")]
+    [Migration("20180922180349_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,17 +27,15 @@ namespace Farfetch.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreationDate");
+                    b.Property<string>("DescriptionProduto");
 
-                    b.Property<int?>("RotaId");
+                    b.Property<string>("DescriptionServiceRota");
 
-                    b.Property<int?>("TogleId");
+                    b.Property<string>("DescriptionToggle");
+
+                    b.Property<string>("Protocol");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RotaId");
-
-                    b.HasIndex("TogleId");
 
                     b.ToTable("Order");
                 });
@@ -50,9 +48,9 @@ namespace Farfetch.Infra.Migrations
 
                     b.Property<bool>("Active");
 
-                    b.Property<string>("Rota");
+                    b.Property<string>("Authorization");
 
-                    b.Property<DateTime>("UpdateDate");
+                    b.Property<string>("Rota");
 
                     b.HasKey("Id");
 
@@ -66,8 +64,6 @@ namespace Farfetch.Infra.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Active");
-
-                    b.Property<DateTime>("CreationDate");
 
                     b.Property<string>("Rota");
 
@@ -88,8 +84,6 @@ namespace Farfetch.Infra.Migrations
 
                     b.Property<bool>("Active");
 
-                    b.Property<DateTime>("CreationDate");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(100);
@@ -107,28 +101,17 @@ namespace Farfetch.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("RotaId");
+                    b.Property<int?>("ServiceRotaId");
 
                     b.Property<int?>("ToggleId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RotaId");
+                    b.HasIndex("ServiceRotaId");
 
                     b.HasIndex("ToggleId");
 
                     b.ToTable("ToggleServiceRota");
-                });
-
-            modelBuilder.Entity("Farfetch.Domain.Models.Entities.Order", b =>
-                {
-                    b.HasOne("Farfetch.Domain.Models.Entities.ServiceRota", "Rota")
-                        .WithMany()
-                        .HasForeignKey("RotaId");
-
-                    b.HasOne("Farfetch.Domain.Models.Entities.Toggle", "Togle")
-                        .WithMany()
-                        .HasForeignKey("TogleId");
                 });
 
             modelBuilder.Entity("Farfetch.Domain.Models.Entities.ServiceRotaToggle", b =>
@@ -140,12 +123,12 @@ namespace Farfetch.Infra.Migrations
 
             modelBuilder.Entity("Farfetch.Domain.Models.Entities.ToggleServiceRota", b =>
                 {
-                    b.HasOne("Farfetch.Domain.Models.Entities.ServiceRota", "Rota")
-                        .WithMany("Toggles")
-                        .HasForeignKey("RotaId");
+                    b.HasOne("Farfetch.Domain.Models.Entities.ServiceRota", "ServiceRota")
+                        .WithMany("ToggleServiceRotas")
+                        .HasForeignKey("ServiceRotaId");
 
                     b.HasOne("Farfetch.Domain.Models.Entities.Toggle", "Toggle")
-                        .WithMany("Rotas")
+                        .WithMany("ToggleServiceRotas")
                         .HasForeignKey("ToggleId");
                 });
 #pragma warning restore 612, 618

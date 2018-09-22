@@ -29,14 +29,17 @@ namespace Farfetch.Infra.Cross.DI
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IToggleRepository, ToggleRepository>();
+            services.AddScoped<IServiceRotaRepository, ServiceRotaRepository>();
             services.AddScoped<IServiceRotaToggleRepository, ServiceRotaToggleRepository>();
         }
 
         private static void ConfigureApplicationServices(IServiceCollection services)
         {
             services.AddScoped<IToggleAppService, ToggleAppService>();
+            services.AddScoped<IServiceRotaAppService, ServiceRotaAppService>();
             services.AddScoped<IServiceRotaToggleAppService, ServiceRotaToggleAppService>();
             services.AddScoped<IOrderAppService, OrderAppService>();
+            services.AddScoped<IAuthorizationFilterAppService, AuthorizationFilterAppService>();
         }
 
         private static void ConfigureDomainServices(IServiceCollection services)
@@ -44,10 +47,15 @@ namespace Farfetch.Infra.Cross.DI
             services.AddScoped<IToggleServiceTask, ToggleServiceTask>();
             services.AddScoped<IToggleEntityService, ToggleEntityService>();
 
+            services.AddScoped<IServiceRotaServiceTask, ServiceRotaServiceTask>();
+            services.AddScoped<IServiceRotaEntityService, ServiceRotaEntityService>();
+
             services.AddScoped<IServiceRotaToggleServiceTask, ServiceRotaToggleServiceTask>();
             services.AddScoped<IServiceRotaToggleEntityService, ServiceRotaToggleEntityService>();
 
             services.AddScoped<IOrderServiceTask, OrderServiceTask>();
+
+            services.AddScoped<IAuthorizationFilterServiceTask, AuthorizationFilterServiceTask>();
         }
     }
 }

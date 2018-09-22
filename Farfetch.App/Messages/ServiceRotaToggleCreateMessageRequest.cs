@@ -6,12 +6,12 @@ namespace Farfetch.App.Messages
     [DataContract]
     public class ServiceRotaToggleCreateMessageRequest
     {
-        //[DataMember(Name = "description")]
-        //[Required(ErrorMessage = "Campo obrigatório")]
-        //public string Description { get; set; }
+        [DataMember(Name = "rota")]
+        [Required(ErrorMessage = "Campo obrigatório")]
+        public string Rota { get; set; }
 
-        //[DataMember(Name = "flag")]
-        //[Required(ErrorMessage = "Campo obrigatório")]
-        //public bool Flag { get; set; }
+        [DataMember(Name = "toggleId")]
+        [Required(ErrorMessage = "Campo obrigatório")]
+        public int toggleId { get; set; }
     }
 }

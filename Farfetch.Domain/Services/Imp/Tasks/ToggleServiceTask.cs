@@ -13,19 +13,34 @@ namespace Farfetch.Domain.Services.Imp.Tasks
     public class ToggleServiceTask : BaseService, IToggleServiceTask
     {
         private IToggleEntityService ToggleEntityService { get; }
+        private IServiceRotaEntityService ServiceRotaEntityService { get; }
 
         public ToggleServiceTask(IUnitOfWork unitOfWork,
-            IToggleEntityService toggleEntityService
+            IToggleEntityService toggleEntityService,
+            IServiceRotaEntityService serviceRotaEntityService
             ) : base(unitOfWork)
         {            
             ToggleEntityService = toggleEntityService;
+            ServiceRotaEntityService = serviceRotaEntityService;
         }
 
-        public HttpResult<Toggle> Create(Toggle toggle)
+        public HttpResult<Toggle> Create(Toggle toggle, List<int> idsServiceRota)
         {
             var retorno = new HttpResult<Toggle>();
             
             _dbContext.Context.Toggle.Add(toggle);
+
+            foreach (var id in idsServiceRota)
+            {
+                var retornoServiceRotaGet = ServiceRotaEntityService.Get(id);
+                if (retornoServiceRotaGet == null) return retorno.SetHttpStatusToNotFound();
+
+                var toggleServiceRota = new ToggleServiceRota();
+                toggleServiceRota.ServiceRota = retornoServiceRotaGet.Result;
+                toggleServiceRota.Toggle = toggle;
+
+                toggle.ToggleServiceRotas.Add(toggleServiceRota);
+            }
 
             _dbContext.SaveChanges();
 
@@ -40,11 +55,10 @@ namespace Farfetch.Domain.Services.Imp.Tasks
             var retorno = new HttpResult<List<Toggle>>();
             retorno.Response = new List<Toggle>();
 
-            var retornotoggleGetAll = ToggleEntityService.GetAll();
-
-            if (retornotoggleGetAll != null && retornotoggleGetAll.Result != null)
+            var retornoToggleGetAll = ToggleEntityService.GetAll();
+            if (retornoToggleGetAll != null && retornoToggleGetAll.Result != null)
             {
-                retorno.Response.AddRange(retornotoggleGetAll.Result);
+                retorno.Response.AddRange(retornoToggleGetAll.Result);
             }
             
             retorno.SetHttpStatusToOk();
@@ -57,7 +71,6 @@ namespace Farfetch.Domain.Services.Imp.Tasks
             var retorno = new HttpResult<Toggle>();
 
             var retornoToggleGet = await ToggleEntityService.Get(id);
-
             if (retornoToggleGet == null) return retorno.SetHttpStatusToNotFound();
 
             retorno.Response = retornoToggleGet;
@@ -66,16 +79,29 @@ namespace Farfetch.Domain.Services.Imp.Tasks
             return retorno;
         }
 
-        public async Task<HttpResult<Toggle>> Update(int id, string description, bool flag)
+        public async Task<HttpResult<Toggle>> Update(int id, string description, bool flag, List<int> idsServiceRota)
         {
             var retorno = new HttpResult<Toggle>();
 
             var retornoToggleGet = await ToggleEntityService.Get(id);
-
             if (retornoToggleGet == null) return retorno.SetHttpStatusToNotFound();
 
             retornoToggleGet.Description = description;
             retornoToggleGet.Flag = flag;
+
+            foreach (var idServiceRota in idsServiceRota)
+            {
+                var retornoServiceRotaGet = ServiceRotaEntityService.Get(idServiceRota);
+                if (retornoServiceRotaGet == null) return retorno.SetHttpStatusToNotFound();
+
+                retornoToggleGet.ToggleServiceRotas = null;
+
+                var toggleServiceRota = new ToggleServiceRota();
+                toggleServiceRota.ServiceRota = retornoServiceRotaGet.Result;
+                toggleServiceRota.Toggle = retornoToggleGet;
+
+                retornoToggleGet.ToggleServiceRotas.Add(toggleServiceRota);
+            }
 
             _dbContext.SaveChanges();
 
@@ -90,7 +116,6 @@ namespace Farfetch.Domain.Services.Imp.Tasks
             var retorno = new HttpResult<Toggle>();
 
             var retornoToggleGet = await ToggleEntityService.Get(id);
-
             if (retornoToggleGet == null) return retorno.SetHttpStatusToNotFound();
 
             retornoToggleGet.Active = false;

@@ -7,10 +7,10 @@ namespace Farfetch.Domain.Services.Contracts.Tasks
 {
     public interface IToggleServiceTask
     {
-        HttpResult<Toggle> Create(Toggle toggle);
+        HttpResult<Toggle> Create(Toggle toggle, List<int> IdsServiceRota);
         Task<HttpResult<List<Toggle>>> GetAll();
         Task<HttpResult<Toggle>> Get(int id);
-        Task<HttpResult<Toggle>> Update(int id, string description, bool flag);
+        Task<HttpResult<Toggle>> Update(int id, string description, bool flag, List<int> IdsServiceRota);
         Task<HttpResult<Toggle>> Delete(int id);
     }
 }

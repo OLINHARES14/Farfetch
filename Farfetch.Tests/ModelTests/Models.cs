@@ -12,7 +12,7 @@ namespace Farfetch.Tests.ModelTests
                 Description = "Toggle Description",
                 Flag = true,
                 Active = true,
-                CreationDate = DateTime.Now
+                 
             };
         }
     }

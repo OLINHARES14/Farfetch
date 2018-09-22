@@ -1,6 +1,6 @@
 ﻿using Farfetch.App.Messages;
 using Farfetch.Domain.Models.Entities;
-using System;
+using Farfetch.Infra.Cross.Helpers;
 
 namespace Farfetch.App.Mapper
 {
@@ -12,8 +12,8 @@ namespace Farfetch.App.Mapper
 
             return new Order
             {
-                //Rota = request.,                
-                CreationDate = DateTime.Now
+                Protocol = request.GetHeader(ServiceConstants.PROTOCOL),
+                DescriptionProduto = request.DescriptionProduto
             };
         }
     }

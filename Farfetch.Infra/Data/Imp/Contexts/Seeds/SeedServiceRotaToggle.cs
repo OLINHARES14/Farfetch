@@ -13,11 +13,11 @@ namespace Farfetch.Infra.Data.Imp.Contexts.Seeds
             {
                 var listaServiceRotaToggle = new List<ServiceRotaToggle>();                
 
-                var CONST_SERVICE = "api/pedido/register";
+                var CONST_SERVICE = "/api/order/register";
 
                 var toggle = context.Toggle.First();
 
-                listaServiceRotaToggle.Add(new ServiceRotaToggle { Rota = CONST_SERVICE, Active = true, Toggle = toggle, CreationDate = DateTime.Now });
+                listaServiceRotaToggle.Add(new ServiceRotaToggle { Rota = CONST_SERVICE, Active = true, Toggle = toggle });
 
                 foreach (var item in listaServiceRotaToggle)
                 {

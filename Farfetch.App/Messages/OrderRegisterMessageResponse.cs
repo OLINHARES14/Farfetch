@@ -7,14 +7,18 @@ namespace Farfetch.App.Messages
     {
         [DataMember(Name = "id")]
         public int Id { get; set; }
-                
-        //[DataMember(Name = "description")]
-        //public string Description { get; set; }
 
-        //[DataMember(Name = "flag")]
-        //public bool Flag { get; set; }
+        [DataMember(Name = "protocol")]
+        public string Protocol { get; set; }
 
-        //[DataMember(Name = "active")]
-        //public bool Active { get; set; }
+        [DataMember(Name = "descriptionToggle")]
+        public string DescriptionToggle { get; set; }
+
+        [DataMember(Name = "descriptionServiceRota")]
+        public string DescriptionServiceRota { get; set; }
+
+        [DataMember(Name = "descriptionProduto")]
+        public string DescriptionProduto { get; set; }
+
     }
 }

@@ -7,7 +7,7 @@ namespace Farfetch.Domain.Services.Contracts.Tasks
 {
     public interface IServiceRotaToggleServiceTask
     {
-        HttpResult<ServiceRotaToggle> Create(ServiceRotaToggle serviceRotaToggle);
+        HttpResult<ServiceRotaToggle> Create(ServiceRotaToggle serviceRotaToggle, int toggleId);
         Task<HttpResult<List<ServiceRotaToggle>>> GetAll();
         Task<HttpResult<ServiceRotaToggle>> Get(int id);
         Task<HttpResult<ServiceRotaToggle>> Update(int id, string rota);

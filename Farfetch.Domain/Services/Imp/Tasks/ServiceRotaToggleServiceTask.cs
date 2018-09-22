@@ -12,19 +12,27 @@ namespace Farfetch.Domain.Services.Imp.Tasks
 {
     public class ServiceRotaToggleServiceTask : BaseService, IServiceRotaToggleServiceTask
     {
+        private IToggleEntityService ToggleEntityService { get; }
         private IServiceRotaToggleEntityService ServiceRotaToggleEntityService { get; }
 
         public ServiceRotaToggleServiceTask(IUnitOfWork unitOfWork,
+            IToggleEntityService toggleEntityService,
             IServiceRotaToggleEntityService serviceRotaToggleEntityService
             ) : base(unitOfWork)
         {
+            ToggleEntityService = toggleEntityService;
             ServiceRotaToggleEntityService = serviceRotaToggleEntityService;
         }
 
-        public HttpResult<ServiceRotaToggle> Create(ServiceRotaToggle serviceRotaToggle)
+        public HttpResult<ServiceRotaToggle> Create(ServiceRotaToggle serviceRotaToggle, int toggleId)
         {
             var retorno = new HttpResult<ServiceRotaToggle>();
-            
+
+            var retornoToggleGet = ToggleEntityService.Get(toggleId);
+            if (retornoToggleGet == null) return retorno.SetHttpStatusToNotFound();
+
+            serviceRotaToggle.Toggle = retornoToggleGet.Result;
+
             _dbContext.Context.ServiceRotaToggle.Add(serviceRotaToggle);
 
             _dbContext.SaveChanges();
@@ -71,7 +79,6 @@ namespace Farfetch.Domain.Services.Imp.Tasks
             var retorno = new HttpResult<ServiceRotaToggle>();
 
             var retornoServiceRotaToggleGet = await ServiceRotaToggleEntityService.Get(id);
-
             if (retornoServiceRotaToggleGet == null) return retorno.SetHttpStatusToNotFound();
 
             retornoServiceRotaToggleGet.Rota = rota;

@@ -22,10 +22,11 @@ namespace Farfetch.App.Mapper
 
             return new OrderRegisterMessageResponse
             {
-                Id = order.Id
-                //Description = toggle.Description,
-                //Flag = toggle.Flag,
-                //Active = order.Active                
+                Id = order.Id,
+                Protocol = order.Protocol,
+                DescriptionProduto = order.DescriptionProduto,
+                DescriptionServiceRota = order.DescriptionServiceRota,
+                DescriptionToggle = order.DescriptionToggle
             };
         }
     }

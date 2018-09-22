@@ -27,8 +27,8 @@ namespace Farfetch.App.Services.Imp
             //{
             //    retorno.SetToUnprocessableEntity();
             //}
-
-            var retornoTaskCreate = ServiceRotaToggleServiceTask.Create(MapToModelServiceRotaToggle.MapToModel(request));
+            
+            var retornoTaskCreate = ServiceRotaToggleServiceTask.Create(MapToModelServiceRotaToggle.MapToModel(request), request.toggleId);
 
             retorno.Response = MapToResponseServiceRotaToggleMessage.MapToServiceRotaToggleMessageResponse(retornoTaskCreate.Response);
             retorno.Message = retornoTaskCreate.Message;

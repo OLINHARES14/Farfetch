@@ -18,8 +18,7 @@ namespace Web.Controllers
             OrderAppService = orderAppService;
         }
 
-        [HttpPost()]
-        [ToggleAuthorizeFilter]
+        [HttpPost()]        
         public async Task<HttpResult<OrderRegisterMessageResponse>> Register([FromBody] OrderRegisterMessageRequest request)
         {
             return await OrderAppService.Register(request);

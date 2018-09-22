@@ -1,6 +1,5 @@
 ﻿using Farfetch.App.Messages;
 using Farfetch.Domain.Models.Entities;
-using System;
 
 namespace Farfetch.App.Mapper
 {
@@ -14,8 +13,7 @@ namespace Farfetch.App.Mapper
             {
                 Description = request.Description,
                 Flag = request.Flag,
-                Active = true,
-                CreationDate = DateTime.Now
+                Active = true
             };
         }
 

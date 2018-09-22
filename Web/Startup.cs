@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Web.Configurations;
+using Web.Filters;
 
 namespace Web
 {
@@ -25,7 +26,11 @@ namespace Web
             services.ConfigureAppSettingsOptions(Configuration);
             
             services.AddMvc().AddJsonOptions(options =>
-            options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
+
+            services
+                .AddMvc(options => options.ConfigureMvcOptions(Configuration, services));
 
             services.AddAutoMapperSetup(Configuration);
             services.ConfigureDbContext(Configuration);
@@ -48,5 +53,12 @@ namespace Web
 
             app.UseMvc();
         }
+
+        //public void ConfigureFilters(IConfiguration configuration, IServiceCollection services)
+        //{
+        //    options.Filters.Add(new AuthorizationFilter(services, configuration));
+            
+        //    return options;
+        //}
     }
 }

@@ -7,9 +7,11 @@ namespace Farfetch.Domain.Models.Entities
     {
         [Key]
         public int Id { get; set; }
+
         public string Rota { get; set; }
-        public bool Active { get; set; }        
+
+        public bool Active { get; set; }   
+        
         public Toggle Toggle { get; set; }
-        public DateTime CreationDate { get; set; }        
     }
 }
