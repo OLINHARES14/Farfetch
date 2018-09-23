@@ -1,5 +1,4 @@
 ﻿using Farfetch.Domain.Models.Entities;
-using System;
 
 namespace Farfetch.Tests.ModelTests
 {
@@ -11,8 +10,7 @@ namespace Farfetch.Tests.ModelTests
             {
                 Description = "Toggle Description",
                 Flag = true,
-                Active = true,
-                 
+                Active = true                 
             };
         }
     }

@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Farfetch.App.Messages
 {
     [DataContract]
-    public class ServiceRotaToggleCreateMessageRequest
+    public class ServiceRotaToggleCreateMessageRequest : BaseRequest
     {
         [DataMember(Name = "rota")]
         [Required(ErrorMessage = "Campo obrigatório")]

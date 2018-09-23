@@ -19,6 +19,5 @@ namespace Farfetch.App.Messages
 
         [DataMember(Name = "descriptionProduto")]
         public string DescriptionProduto { get; set; }
-
     }
 }

@@ -5,6 +5,5 @@ namespace Farfetch.Domain.Services.Contracts.Infra.Data.UoW
 {
     public interface IUnitOfWork : IUoWBase<IDbContextFarfetch>
     {
-
     }
 }

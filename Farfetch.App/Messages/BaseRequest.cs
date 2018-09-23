@@ -10,16 +10,10 @@ namespace Farfetch.App.Messages
         public BaseRequest() { }
 
         /// <summary>
-        /// Protocolo da requisição.
-        /// </summary>
-        //public string Protocolo { get { return GetHeader("Protocol"); } }
-
-        /// <summary>
         /// Headers da requisição.
         /// </summary>
         public virtual IDictionary<string, string> DefaultRequestHeaders { get; private set; } = new Dictionary<string, string>();
 
-        
         /// <summary>
         /// Adicionar mais um item ao header. Caso o valor seja vazio, não será adicionada a chave ao header.
         /// </summary>

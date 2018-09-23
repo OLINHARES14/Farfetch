@@ -16,7 +16,5 @@ namespace Farfetch.App.Messages
 
         [DataMember(Name = "active")]
         public bool Active { get; set; }
-
-        //Lista ToggleServiceRota
     }
 }

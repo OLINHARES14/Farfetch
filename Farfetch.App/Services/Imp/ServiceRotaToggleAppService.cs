@@ -22,12 +22,7 @@ namespace Farfetch.App.Services.Imp
             var retorno = new HttpResult<ServiceRotaToggleMessageResponse>();
 
             if (request == null) return new HttpResult<ServiceRotaToggleMessageResponse>().SetHttpStatusToBadRequest();
-
-            //if (!ValidarDadosEntrada(request))
-            //{
-            //    retorno.SetToUnprocessableEntity();
-            //}
-            
+                        
             var retornoTaskCreate = ServiceRotaToggleServiceTask.Create(MapToModelServiceRotaToggle.MapToModel(request), request.toggleId);
 
             retorno.Response = MapToResponseServiceRotaToggleMessage.MapToServiceRotaToggleMessageResponse(retornoTaskCreate.Response);

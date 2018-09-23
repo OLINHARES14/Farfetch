@@ -1,8 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Farfetch.Infra.Cross.DI;
 using Web.Filters;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Configurations
 {
@@ -16,8 +15,7 @@ namespace Web.Configurations
         }
 
         public static MvcOptions ConfigureFilters(this MvcOptions options, IConfiguration configuration, IServiceCollection services)
-        {
-            
+        {   
             options.Filters.Add(new AuthorizationFilter(services));
             options.Filters.Add(new AuthenticationFilter());
             options.Filters.Add(new RequestFilter());

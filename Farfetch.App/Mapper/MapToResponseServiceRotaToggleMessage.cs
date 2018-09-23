@@ -23,8 +23,8 @@ namespace Farfetch.App.Mapper
             return new ServiceRotaToggleMessageResponse
             {
                 Id = serviceRotaToggle.Id,
-                //Description = toggle.Description,
-                //Flag = toggle.Flag,
+                Rota = serviceRotaToggle.Rota,
+                ToggleId = serviceRotaToggle.Toggle.Id,
                 Active = serviceRotaToggle.Active                
             };
         }

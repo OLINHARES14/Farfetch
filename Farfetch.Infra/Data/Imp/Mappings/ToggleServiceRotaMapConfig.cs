@@ -29,8 +29,7 @@ namespace Farfetch.Infra.Data.Imp.Mappings
             entity.HasOne(it => it.ServiceRota)
             .WithMany(it => it.ToggleServiceRotas)
             .HasForeignKey(it => it.ServiceRotaId)
-            .OnDelete(DeleteBehavior.Cascade);
-            
+            .OnDelete(DeleteBehavior.Cascade);            
         };
     }
 }

@@ -5,7 +5,6 @@ using Farfetch.Domain.Services.Contracts.Infra.Data.UoW;
 using Farfetch.Domain.Services.Contracts.Tasks;
 using Farfetch.Domain.Services.Imp.Entities.Base;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace Farfetch.Domain.Services.Imp.Tasks
@@ -123,7 +122,7 @@ namespace Farfetch.Domain.Services.Imp.Tasks
             _dbContext.SaveChanges();
 
             retorno.Response = retornoToggleGet;
-            retorno.Set((HttpStatusCode)204, "Toggle delete");
+            retorno.SetHttpStatusToOk();
 
             return retorno;
         }

@@ -9,7 +9,6 @@ namespace Farfetch.Infra.Data.Imp.Contexts
             SeedServiceRota.InsertData(context);
             SeedToogle.InsertData(context);
             SeedServiceRotaToggle.InsertData(context);
-            SeedOrder.InsertData(context);
         }
     }
 }

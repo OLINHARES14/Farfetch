@@ -34,8 +34,9 @@ namespace Farfetch.Infra.Data.Imp.Contexts.Seeds
                 {
                     context.Toggle.Add(item);
                 }
-                                
-                //Relacionamento
+
+                #region [ Relacionamento ]
+
                 var listaToggleRelacionamento = new List<Toggle>();
                 var listaServiceRota = context.ServiceRota.ToList();
 
@@ -54,6 +55,8 @@ namespace Farfetch.Infra.Data.Imp.Contexts.Seeds
                     toggle4.ToggleServiceRotas.Add(new ToggleServiceRota { Toggle = toggle4, ServiceRota = serviceRotaB });
                     toggle4.ToggleServiceRotas.Add(new ToggleServiceRota { Toggle = toggle4, ServiceRota = serviceRotaC });
                 }
+
+                #endregion
 
                 context.SaveChanges();
             }

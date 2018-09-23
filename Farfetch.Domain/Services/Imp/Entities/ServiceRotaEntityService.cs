@@ -15,6 +15,7 @@ namespace Farfetch.Domain.Services.Imp.Entities
         public ServiceRotaEntityService(IUnitOfWork unitOfWork, IServiceRotaRepository serviceRotaRepository) : base(unitOfWork) { ServiceRotaRepository = serviceRotaRepository; }
 
         public async Task<List<ServiceRota>> GetAll() => await ServiceRotaRepository.GetAll();
+
         public async Task<ServiceRota> Get(int id) => await ServiceRotaRepository.Get(id);
     }
 }

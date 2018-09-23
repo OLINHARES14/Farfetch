@@ -5,7 +5,6 @@ using Farfetch.Domain.Services.Contracts.Infra.Data.UoW;
 using Farfetch.Domain.Services.Contracts.Tasks;
 using Farfetch.Domain.Services.Imp.Entities.Base;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace Farfetch.Domain.Services.Imp.Tasks
@@ -65,7 +64,6 @@ namespace Farfetch.Domain.Services.Imp.Tasks
             var retorno = new HttpResult<ServiceRotaToggle>();
 
             var retornoServiceRotaToggleGet = await ServiceRotaToggleEntityService.Get(id);
-
             if (retornoServiceRotaToggleGet == null) return retorno.SetHttpStatusToNotFound();
 
             retorno.Response = retornoServiceRotaToggleGet;
@@ -96,7 +94,6 @@ namespace Farfetch.Domain.Services.Imp.Tasks
             var retorno = new HttpResult<ServiceRotaToggle>();
 
             var retornoServiceRotaToggleGet = await ServiceRotaToggleEntityService.Get(id);
-
             if (retornoServiceRotaToggleGet == null) return retorno.SetHttpStatusToNotFound();
 
             retornoServiceRotaToggleGet.Active = false;
@@ -104,7 +101,7 @@ namespace Farfetch.Domain.Services.Imp.Tasks
             _dbContext.SaveChanges();
 
             retorno.Response = retornoServiceRotaToggleGet;
-            retorno.Set((HttpStatusCode)204, "Service Rota Toggle delete");
+            retorno.SetHttpStatusToOk();
 
             return retorno;
         }

@@ -1,12 +1,9 @@
-﻿using Farfetch.App.Messages;
-using Farfetch.App.Services.Contracts;
+﻿using Farfetch.App.Services.Contracts;
 using Farfetch.Domain.HttpServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Web.Filters
@@ -30,20 +27,24 @@ namespace Web.Filters
                 var retorno = new HttpResult<IActionResult>();
                 retorno.SetToUnprocessableEntity();
                 context.Result = retorno;
+
                 return;
             }
             else
             {
                 var serviceRotaToggle = context.HttpContext.Request.Path.Value;
 
-                var request = context.HttpContext.Request;
-                request.Headers.Add("Rota", serviceRotaToggle);
+                context.HttpContext.Request.Headers.Add("Rota", serviceRotaToggle);
 
                 var response = await AuthorizationFilterAppService.Validate(serviceRotaToggle, authorization);
                 if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
+                {
                     await next();
+                }
                 else
+                {
                     context.Result = response;
+                }
 
                 return;
             }

@@ -27,37 +27,74 @@ namespace Farfetch.Domain.HttpServices
         #region Padrões de respostas Http
 
         /// <summary>
-        /// 422 Unprocessable Entity - Invalid bankslip provided.The possible reasons are: A field of the provided bankslip was null or with invalid values        
+        /// 422 Unprocessable Entity - Utilizado para validações de negócio ou alguma informação necessária para uma ação.        
         /// </summary>
         /// <param name="msg"></param>
-        public HttpResult<TResponseMessage> SetToUnprocessableEntity(string msg = "Invalid bankslip provided. The possible reasons are: A field of the provided bankslip was null or with invalid values") => Set((HttpStatusCode)422, msg);
+        public HttpResult<TResponseMessage> SetToUnprocessableEntity(string msg) => Set((HttpStatusCode)422, msg);
 
         /// <summary>
-        /// 200 OK - Utilizado para sucesso.
+        /// 200 OK - Utilizado para todas as situações de sucesso.
         /// </summary>
-        public HttpResult<TResponseMessage> SetHttpStatusToOk(string msg = "Ok") => Set(HttpStatusCode.OK, msg);
+        public HttpResult<TResponseMessage> SetHttpStatusToOk(string msg = "Sucesso") => Set(HttpStatusCode.OK, msg);
 
         /// <summary>
-        /// 201 - Bankslip created.</c>
+        /// 201 Created - Utilizado para criação de registro no banco
         /// </summary>
-        public HttpResult<TResponseMessage> SetHttpStatusToCreated(string msg = "Bankslip created.") => Set(HttpStatusCode.Created, msg);
+        public HttpResult<TResponseMessage> SetHttpStatusToCreated(string msg = "Criado com sucesso.") => Set(HttpStatusCode.Created, msg);
 
         /// <summary>
-        /// 400 Bad Request - Bankslip not provided in the request body.        
+        /// 202 Accepted - Utilizado para chamadas async ou adicionar algum item em fila de processamento.
+        /// </summary>
+        public HttpResult<TResponseMessage> SetHttpStatusToAccepted(string msg = "Em fila de processamento.") => Set(HttpStatusCode.Accepted, msg);
+
+        /// <summary>
+        /// 400 Bad Request - Utilizado para a maioria dos erros de request.
+        /// <c>Campos obrigatórios no request ou erro na camada de serviço.</c>
+        /// </summary>
+        public HttpResult<TResponseMessage> SetHttpStatusToBadRequest(string msg) => Set(HttpStatusCode.BadRequest, msg);
+
+        /// <summary>
+        /// 500 Internal Server Error - Utilizado para erros internos no servidor ou exceptions.
+        /// </summary>
+        public HttpResult<TResponseMessage> SetHttpStatusToInternalServerError(string msg = "Erro de comunicação.") => Set(HttpStatusCode.InternalServerError, msg);
+
+        /// <summary>
+        /// 403 Forbidden - Utilizado para requisições rejeitadas pelo servidor.        
+        /// </summary>
+        public HttpResult<TResponseMessage> SetHttpStatusToForbidden(string msg = "O servidor recusou a requisição.") => Set(HttpStatusCode.Forbidden, msg);
+
+        /// <summary>
+        /// 404 Not Found - Utilizado para informar rota inválida.
+        /// </summary>
+        public HttpResult<TResponseMessage> SetHttpStatusToNotFound(string msg = "Recurso não encontrado no servidor.") => Set(HttpStatusCode.NotFound, msg);
+
+        /// <summary>
+        /// 503 Service Unavailable - Utilizado para informar serviço indisponível.
+        /// <c>Utilizado principalmente pelos conectores.</c>
+        /// </summary>
+        public HttpResult<TResponseMessage> SetHttpStatusToServiceUnavailable(string msg = "Serviço indisponível.") => Set(HttpStatusCode.ServiceUnavailable, msg);
+
+        /// <summary>
+        /// 401 Unauthorized - Utilizado para token inválido ou restrição de acesso.
+        /// </summary>
+        public HttpResult<TResponseMessage> SetHttpStatusToUnauthorized(string msg = "Não autorizado o acesso ao recurso.") => Set(HttpStatusCode.Unauthorized, msg);
+
+        /// <summary>
+        /// 406 NotAcceptable - Utilizado para informar que existe informações que devem ser passadas no header.         
+        /// </summary>    
+        public HttpResult<TResponseMessage> SetHttpStatusToNotAcceptable(string msg = "Informação Authorization no header é obrigatório.") => Set(HttpStatusCode.NotAcceptable, msg);
+
+        /// <summary>
+        ///  408 RequestTimeout
         /// </summary>
         /// <param name="msg"></param>
-        public HttpResult<TResponseMessage> SetHttpStatusToBadRequest(string msg = "Bankslip not provided in the request body") => Set(HttpStatusCode.BadRequest, msg);
+        public HttpResult<TResponseMessage> SetHttpStatusToRequestTimeout(string msg = "Tempo limite atingido no request.") => Set(HttpStatusCode.RequestTimeout, msg);
 
         /// <summary>
-        /// 404 Not Found - Bankslip not found with the specified id.
-        /// </summary>
-        public HttpResult<TResponseMessage> SetHttpStatusToNotFound(string msg = "Bankslip not found with the specified id.") => Set(HttpStatusCode.NotFound, msg);
-
-        /// <summary>
-        /// 204 - No content        
+        ///  504 GatewayTimeout
         /// </summary>
         /// <param name="msg"></param>
-        public HttpResult<TResponseMessage> SetHttpStatusToNoContent(string msg = "No content") => Set((HttpStatusCode)204, msg);
+        public HttpResult<TResponseMessage> SetHttpStatusToGatewayTimeout(string msg = "Tempo limite atingido.") => Set(HttpStatusCode.GatewayTimeout, msg);
 
         #endregion Padrões de respostas Http
 
