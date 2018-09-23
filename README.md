@@ -1,12 +1,16 @@
 # Farfetch - Processo Seletivo
 Projeto de 'Toggler Service' da Farfetch
 
-	Foi implementado uma api com a funcionalidade do 'Toggler Service' chamada '/api/order/register' ela possui um tipo de 'Toggle' cadastrado, 
-no qual possui a configuração dos serviços que podem gerar um 'register', poderíamos aplicar o conceito do 'Toggle' de diversas outras formas,
-mas no desafio proposto esse foi o cenário contemplado no código realizado aqui versionado.
-	Temos 3 cadastros básicos em apis implementados, que são 'Toggle', 'ServiceRota' e 'ServiceRotaToggle' eles são utilizados como base na implementação do 'Toggler Service'.
-	Não foi possível cobrir todos cenários para Testes e Validação, pois o objetivo foi focar na implementação do fluxo de ponta a ponta.
-	Para resolver o problema de configuração possível em diversos servidores, foi implementado o controle do acesso no banco de dados, tendo assim um único ponto de configuração a ser feito.
+	Foi implementado uma api com a funcionalidade do 'Toggler Service' chamada '/api/order/register' ela possui um 
+tipo de 'Toggle' cadastrado, no qual possui a configuração dos serviços que podem gerar um 'register', poderíamos 
+aplicar o conceito do 'Toggle' de diversas outras formas, mas no desafio proposto esse foi o cenário contemplado no 
+código realizado aqui versionado.
+	Temos 3 cadastros básicos em apis implementados, que são 'Toggle', 'ServiceRota' e 'ServiceRotaToggle' eles são 
+utilizados como base na implementação do 'Toggler Service'.
+	Não foi possível cobrir todos cenários para Testes e Validação, pois o objetivo foi focar na implementação do fluxo 
+de ponta a ponta.
+	Para resolver o problema de configuração possível em diversos servidores, foi implementado o controle do acesso 
+no banco de dados,  tendo assim um único ponto de configuração a ser feito.
 
 #  Sobre o desenvolvimento do sistema
 - .Net Core
