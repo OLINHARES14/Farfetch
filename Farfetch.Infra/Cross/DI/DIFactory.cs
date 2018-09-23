@@ -31,6 +31,7 @@ namespace Farfetch.Infra.Cross.DI
             services.AddScoped<IToggleRepository, ToggleRepository>();
             services.AddScoped<IServiceRotaRepository, ServiceRotaRepository>();
             services.AddScoped<IServiceRotaToggleRepository, ServiceRotaToggleRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
         }
 
         private static void ConfigureApplicationServices(IServiceCollection services)
@@ -54,6 +55,7 @@ namespace Farfetch.Infra.Cross.DI
             services.AddScoped<IServiceRotaToggleEntityService, ServiceRotaToggleEntityService>();
 
             services.AddScoped<IOrderServiceTask, OrderServiceTask>();
+            services.AddScoped<IOrderEntityService, OrderEntityService>();
 
             services.AddScoped<IAuthorizationFilterServiceTask, AuthorizationFilterServiceTask>();
         }

@@ -47,6 +47,7 @@ mas no desafio proposto esse foi o cenário contemplado no código realizado aqu
 	B- Experimente alterar por API de Update o 'Toggle' da 'ServiceRotaToggle' para o toggle Description: 'IsButtonTrue' e Flag: '0' (false) '' 
 	C- Fazendo um novo chamado a API de rota '/api/order/register' com o 'Authorization' da 'ServiceRota' da rota igual '/api/service/a' NÃO SERÁ mais possível realizar um novo 'register' na tabela.
 	D- Fazendo um novo chamado a API de rota '/api/order/register' com o 'Authorization' da 'ServiceRota' da rota igual '/api/service/abc' SERÁ possível realizar um novo 'register' na tabela.
+	E- Pode realizar a consulta a API ' /api/order/register' com o verbo 'GET' para consultar todos os 'register' já incluídos.
 
 5- Agora será apenas decidir qual será as rotas permitidas por 'Toggle' e configurar a mesma no 'ServiceRotaToggle'.
 
@@ -84,7 +85,7 @@ Boa sorte.
 	(Post) Create / (Get) GetAll / (Get) Get / (Post) Update  e (Delete) Delete (utilizado para delete lógico apenas)
 	
 	Order
-	(Post) Register e (Get) GetAll
+	(Post) Register / (Get) GetAll e (Get) Get 
 	
 - Utilizei o Postman para chamadas das APIs
 
@@ -595,6 +596,56 @@ Json
         "descriptionProduto": null
     },
     "mensagem": "Recurso não encontrado no servidor."
+}
+
+# Request (Json) - Get All
+- [Get]
+- Url: {Localhost}/api/order/register
+
+# Response (Json) - Get All
+Json
+{
+    "retorno": [
+        {
+            "id": 1,
+            "protocol": "4cb95a8e-3cef-4f1f-9573-2975af706ddf",
+            "descriptionToggle": "isButtonBlue",
+            "descriptionServiceRota": "/api/service/b",
+            "descriptionProduto": "chamada"
+        },
+        {
+            "id": 2,
+            "protocol": "8be45c5d-6551-4db3-ba84-79aa63d97058",
+            "descriptionToggle": "isButtonBlue",
+            "descriptionServiceRota": "/api/service/abc",
+            "descriptionProduto": "chamada"
+        }
+    ],
+    "mensagem": "Sucesso"
+}
+
+# Request (Json) - Get
+- [Get]
+- Url: {Localhost}/api/order/register/{id}
+
+# Response (Json) - Get
+Json
+{
+    "retorno": {
+        "id": 1,
+        "protocol": "4cb95a8e-3cef-4f1f-9573-2975af706ddf",
+        "descriptionToggle": "isButtonBlue",
+        "descriptionServiceRota": "/api/service/b",
+        "descriptionProduto": "chamada"
+    },
+    "mensagem": "Sucesso"
+}
+
+# Response  (Json) - Get - Algumas Validações
+Json
+{
+    "retorno": null,
+    "mensagem": "Identificar inválido"
 }
 
 # Outras informações

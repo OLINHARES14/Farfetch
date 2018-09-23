@@ -2,6 +2,7 @@
 using Farfetch.App.Services.Contracts;
 using Farfetch.Domain.HttpServices;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Web.Controllers
@@ -21,6 +22,18 @@ namespace Web.Controllers
         public async Task<HttpResult<OrderRegisterMessageResponse>> Register([FromBody] OrderRegisterMessageRequest request)
         {
             return await OrderAppService.Register(request);
+        }
+
+        [HttpGet()]
+        public async Task<HttpResult<List<OrderRegisterMessageResponse>>> GetAll()
+        {
+            return await OrderAppService.GetAll();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<HttpResult<OrderRegisterMessageResponse>> Get(int id)
+        {
+            return await OrderAppService.Get(id);
         }
     }
 }
