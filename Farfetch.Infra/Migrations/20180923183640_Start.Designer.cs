@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Farfetch.Infra.Migrations
 {
     [DbContext(typeof(DbContextFarfetch))]
-    [Migration("20180923030341_v1")]
-    partial class v1
+    [Migration("20180923183640_Start")]
+    partial class Start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -1,6 +1,4 @@
 ﻿using Farfetch.App.Services.Contracts;
-using Farfetch.Domain.HttpServices;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using System;

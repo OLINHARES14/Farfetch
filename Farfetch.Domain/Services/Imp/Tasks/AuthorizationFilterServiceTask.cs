@@ -30,12 +30,9 @@ namespace Farfetch.Domain.Services.Imp.Tasks
             var retorno = new HttpResult<IActionResult>();
             
             var serviceRotaToggle = ServiceRotaToggleEntityService.GetAll().Result.Where(x => x.Rota == rota).FirstOrDefault();
-
             var toggle = ToggleEntityService.Get(serviceRotaToggle.Toggle.Id);
-                        
-            var serviceRota = ServiceRotaEntityService.GetAll().Result.Where(x => x.Authorization == authorization).FirstOrDefault();
-
             var toggleServiceRotas = toggle.Result.ToggleServiceRotas;
+            var serviceRota = ServiceRotaEntityService.GetAll().Result.Where(x => x.Authorization == authorization).FirstOrDefault();
 
             if (toggleServiceRotas != null && toggleServiceRotas.Count == 0)
             {

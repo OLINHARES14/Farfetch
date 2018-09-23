@@ -8,8 +8,6 @@ namespace Farfetch.Domain.HttpServices
     [DataContract()]
     public class HttpResult<TResponseMessage> : IActionResult where TResponseMessage : class
     {
-                
-
         public HttpResult() {}
 
         [DataMember(Name = "retorno")]

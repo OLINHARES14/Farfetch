@@ -1,17 +1,56 @@
 # Farfetch - Processo Seletivo
-Projeto de toggle service da Farfetch
+Projeto de 'Toggler Service' da Farfetch
+
+	Foi implementado uma api com a funcionalidade do 'Toggler Service' chamada '/api/order/register' ela possui um tipo de 'Toggle' cadastrado, 
+no qual possui a configuração dos serviços que podem gerar um 'register', poderíamos aplicar o conceito do 'Toggle' de diversas outras formas,
+mas no desafio proposto esse foi o cenário contemplado no código realizado aqui versionado.
+	Temos 3 cadastros básicos em apis implementados, que são 'Toggle', 'ServiceRota' e 'ServiceRotaToggle' eles são utilizados como base na implementação do 'Toggler Service'.
+	Não foi possível cobrir todos cenários para Testes e Validação, pois o objetivo foi focar na implementação do fluxo de ponta a ponta.
+	Para resolver o problema de configuração possível em diversos servidores, foi implementado o controle do acesso no banco de dados, tendo assim um único ponto de configuração a ser feito.
 
 #  Sobre o desenvolvimento do sistema
 - .Net Core
 - Banco de Dados LocalDb
+- Object oriented programming
+- SOLID Principles
 - DDD
-- Api Rest
+- Rest API
 - Testes
 - Migration in Code First
 - Injeção de dependência
-- Filter Authorization (Utilizado para implementar o 'Toggle')
+- Filter Authorization  (Utilizado para implementar o 'Toggle')
 - Filter Authetication (Utilizado para gerar o protocolo de requisição)
 - Filter Request (Utilizado para manter alguns valores no Header do Request)
+- Base de Dados
+	
+# Primeiros passos
+1- Começaremos gerando o banco de dados e para isso utilizaremos a técnica migrations.
+	A- Utilizar o console para podermos aplicar os comandos 
+	Abrir - Console do Gerenciador de Pacotes
+
+	B- Necessário selecionar o projeto abaixo para executar os comandos do migration
+	Selecionar - 4.Infra\Farfetch.Infra
+
+	C- Gerar os scripts
+	Add-Migration "Nome que desejar"
+
+	D- Executar scripts no banco de dados
+	Update-Database
+	
+2- Executar o projeto
+	Será aplicado um script de carga no banco de dados de forma automática para que seja representado o ambiente proposto no desafio 'ToggleService'.
+
+3- Utilizar ferramenta para executar APIs, uma indicação é usar o 'Postman'
+
+4- Procurar na documentação abaixo a API de rota '/api/order/register' e executar passando o Header com 'Authorization' referente a 'ServiceRota' que deseja fazer o 'register'.
+	A- No primeiro momento a API de rota '/api/order/register', está configurada para o toggle Description: 'IsButtonTrue' e Flag: '1' (true), que está configurado para ser utilizado para qualquer chamada de 'Authorization' referente a 'ServiceRota'.
+	B- Experimente alterar por API de Update o 'Toggle' da 'ServiceRotaToggle' para o toggle Description: 'IsButtonTrue' e Flag: '0' (false) '' 
+	C- Fazendo um novo chamado a API de rota '/api/order/register' com o 'Authorization' da 'ServiceRota' da rota igual '/api/service/a' NÃO SERÁ mais possível realizar um novo 'register' na tabela.
+	D- Fazendo um novo chamado a API de rota '/api/order/register' com o 'Authorization' da 'ServiceRota' da rota igual '/api/service/abc' SERÁ possível realizar um novo 'register' na tabela.
+
+5- Agora será apenas decidir qual será as rotas permitidas por 'Toggle' e configurar a mesma no 'ServiceRotaToggle'.
+
+Boa sorte.
 
 # Validações
 - Requests com validações
@@ -28,7 +67,7 @@ Projeto de toggle service da Farfetch
 	- Toggle (Cadastramento dos flags)
 	- ServiceRota (Cadastramento das rotas que utilizam as apis com 'Toggle')
 	- ToggleServiceRota (Relacionamento de permissão das 'ServiceRota' por 'Toggle')
-		Obs. Se um Toggle não tiver relacionamento algum na tabela 'ToggleServiceRota' isso quer dizer que ele tem acesso Full.
+		Obs. Se um Toggle não tiver relacionamento algum na tabela 'ToggleServiceRota' isso quer dizer que a rota associado a esse 'Toggle' deixará livre o acesso a qualquer rota que desejar utilizar o serviço.
 	- ServiceRotaToggle (Cadastramento das rotas que utilizam o 'Toggle')
 	- Order (Registro de quais serviços conseguiram passar pela 'ServiceRotaToggle')
 - Criado um seed para alimentar a base com os dados referente ao desafio
@@ -45,7 +84,7 @@ Projeto de toggle service da Farfetch
 	(Post) Create / (Get) GetAll / (Get) Get / (Post) Update  e (Delete) Delete (utilizado para delete lógico apenas)
 	
 	Order
-	(Post) Register
+	(Post) Register e (Get) GetAll
 	
 - Utilizei o Postman para chamadas das APIs
 
