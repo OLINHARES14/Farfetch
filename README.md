@@ -1,15 +1,15 @@
 # Farfetch - Processo Seletivo
 Projeto de 'Toggler Service' da Farfetch
 
-	Foi implementado uma api com a funcionalidade do 'Toggler Service' chamada '/api/order/register' ela possui um 
+   Foi implementado uma api com a funcionalidade do 'Toggler Service' chamada '/api/order/register' ela possui um 
 tipo de 'Toggle' cadastrado, no qual possui a configuração dos serviços que podem gerar um 'register', poderíamos 
 aplicar o conceito do 'Toggle' de diversas outras formas, mas no desafio proposto esse foi o cenário contemplado no 
 código realizado aqui versionado.
-	Temos 3 cadastros básicos em apis implementados, que são 'Toggle', 'ServiceRota' e 'ServiceRotaToggle' eles são 
+   Temos 3 cadastros básicos em apis implementados, que são 'Toggle', 'ServiceRota' e 'ServiceRotaToggle' eles são 
 utilizados como base na implementação do 'Toggler Service'.
-	Não foi possível cobrir todos cenários para Testes e Validação, pois o objetivo foi focar na implementação do fluxo 
+   Não foi possível cobrir todos cenários para Testes e Validação, pois o objetivo foi focar na implementação do fluxo 
 de ponta a ponta.
-	Para resolver o problema de configuração possível em diversos servidores, foi implementado o controle do acesso 
+   Para resolver o problema de configuração possível em diversos servidores, foi implementado o controle do acesso 
 no banco de dados,  tendo assim um único ponto de configuração a ser feito.
 
 #  Sobre o desenvolvimento do sistema
@@ -48,7 +48,7 @@ no banco de dados,  tendo assim um único ponto de configuração a ser feito.
 
 4- Procurar na documentação abaixo a API de rota '/api/order/register' e executar passando o Header com 'Authorization' referente a 'ServiceRota' que deseja fazer o 'register'.
 	A- No primeiro momento a API de rota '/api/order/register', está configurada para o toggle Description: 'IsButtonTrue' e Flag: '1' (true), que está configurado para ser utilizado para qualquer chamada de 'Authorization' referente a 'ServiceRota'.
-	B- Experimente alterar por API de Update o 'Toggle' da 'ServiceRotaToggle' para o toggle Description: 'IsButtonTrue' e Flag: '0' (false) '' 
+	B- Experimente alterar por API de Update o 'Toggle' da 'ServiceRotaToggle' para o toggle Description: 'IsButtonTrue' e Flag: '0' (false) 
 	C- Fazendo um novo chamado a API de rota '/api/order/register' com o 'Authorization' da 'ServiceRota' da rota igual '/api/service/a' NÃO SERÁ mais possível realizar um novo 'register' na tabela.
 	D- Fazendo um novo chamado a API de rota '/api/order/register' com o 'Authorization' da 'ServiceRota' da rota igual '/api/service/abc' SERÁ possível realizar um novo 'register' na tabela.
 	E- Pode realizar a consulta a API ' /api/order/register' com o verbo 'GET' para consultar todos os 'register' já incluídos.
