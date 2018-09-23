@@ -21,7 +21,7 @@ namespace Farfetch.App.Services.Imp
         {
             var retorno = new HttpResult<OrderRegisterMessageResponse>();
 
-            if (request == null) return new HttpResult<OrderRegisterMessageResponse>().SetHttpStatusToBadRequest();
+            if (request == null) return retorno.SetHttpStatusToBadRequest();
              
             var retornoTaskRegister = OrderServiceTask.Register(
                 MapToModelOrder.MapToModel(request), 

@@ -22,15 +22,7 @@ namespace Web.Filters
         {
             string authorization = context.HttpContext.Request.Headers["Authorization"].ToString();
 
-            if (string.IsNullOrWhiteSpace(authorization))
-            {
-                var retorno = new HttpResult<IActionResult>();
-                retorno.SetToUnprocessableEntity();
-                context.Result = retorno;
-
-                return;
-            }
-            else
+            if (!string.IsNullOrWhiteSpace(authorization))
             {
                 var serviceRotaToggle = context.HttpContext.Request.Path.Value;
 
@@ -48,6 +40,8 @@ namespace Web.Filters
 
                 return;
             }
+
+            await next();
         }
     }
 }

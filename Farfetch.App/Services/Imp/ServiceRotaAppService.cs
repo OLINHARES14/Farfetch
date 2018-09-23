@@ -3,6 +3,7 @@ using Farfetch.App.Messages;
 using Farfetch.App.Services.Contracts;
 using Farfetch.Domain.HttpServices;
 using Farfetch.Domain.Services.Contracts.Tasks;
+using Farfetch.Infra.Cross.Helpers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@ namespace Farfetch.App.Services.Imp
         {
             var retorno = new HttpResult<ServiceRotaMessageResponse>();
 
-            if (request == null) return new HttpResult<ServiceRotaMessageResponse>().SetHttpStatusToBadRequest();
+            if (request == null) return retorno.SetHttpStatusToBadRequest();
             
             var retornoTaskCreate = ServiceRotaServiceTask.Create(MapToModelServiceRota.MapToModel(request));
 
@@ -48,6 +49,8 @@ namespace Farfetch.App.Services.Imp
         {
             var retorno = new HttpResult<ServiceRotaMessageResponse>();
 
+            if (id <= 0) return retorno.SetToUnprocessableEntity(ServiceConstants.IDENTIFICADOR_INVALIDO);
+
             var retornoTaskGet = ServiceRotaServiceTask.Get(id);
 
             retorno.Response = MapToResponseServiceRotaMessage.MapToServiceRotaMessageResponse(retornoTaskGet.Result.Response);
@@ -60,7 +63,8 @@ namespace Farfetch.App.Services.Imp
         {
             var retorno = new HttpResult<ServiceRotaMessageResponse>();
 
-            if (request == null) return new HttpResult<ServiceRotaMessageResponse>().SetHttpStatusToNoContent();
+            if (id <= 0) return retorno.SetToUnprocessableEntity(ServiceConstants.IDENTIFICADOR_INVALIDO);
+            if (request == null) return retorno.SetHttpStatusToBadRequest();
                         
             var retornoTaskUpdate = ServiceRotaServiceTask.Update(id, request.Rota);
                         
@@ -74,8 +78,7 @@ namespace Farfetch.App.Services.Imp
         {
             var retorno = new HttpResult<ServiceRotaMessageResponse>();
 
-            if (id == 0)
-                return new HttpResult<ServiceRotaMessageResponse>().SetHttpStatusToNoContent();
+            if (id <= 0) return retorno.SetToUnprocessableEntity(ServiceConstants.IDENTIFICADOR_INVALIDO);
 
             var retornoTaskDelete = ServiceRotaServiceTask.Delete(id);
 

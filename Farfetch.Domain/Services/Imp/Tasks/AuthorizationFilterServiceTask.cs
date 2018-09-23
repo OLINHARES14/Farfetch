@@ -34,7 +34,14 @@ namespace Farfetch.Domain.Services.Imp.Tasks
             var toggle = ToggleEntityService.Get(serviceRotaToggle.Toggle.Id);
                         
             var serviceRota = ServiceRotaEntityService.GetAll().Result.Where(x => x.Authorization == authorization).FirstOrDefault();
-            
+
+            var toggleServiceRotas = toggle.Result.ToggleServiceRotas;
+
+            if (toggleServiceRotas != null && toggleServiceRotas.Count == 0)
+            {
+                return true;
+            }
+
             foreach (var toggleServiceRota in toggle.Result.ToggleServiceRotas)
             {
                 if (toggleServiceRota.ServiceRota.Id == serviceRota.Id)

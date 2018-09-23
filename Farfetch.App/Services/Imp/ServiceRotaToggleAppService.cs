@@ -3,6 +3,7 @@ using Farfetch.App.Messages;
 using Farfetch.App.Services.Contracts;
 using Farfetch.Domain.HttpServices;
 using Farfetch.Domain.Services.Contracts.Tasks;
+using Farfetch.Infra.Cross.Helpers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@ namespace Farfetch.App.Services.Imp
         {
             var retorno = new HttpResult<ServiceRotaToggleMessageResponse>();
 
-            if (request == null) return new HttpResult<ServiceRotaToggleMessageResponse>().SetHttpStatusToBadRequest();
+            if (request == null) return retorno.SetHttpStatusToBadRequest();
                         
             var retornoTaskCreate = ServiceRotaToggleServiceTask.Create(MapToModelServiceRotaToggle.MapToModel(request), request.toggleId);
 
@@ -48,6 +49,8 @@ namespace Farfetch.App.Services.Imp
         {
             var retorno = new HttpResult<ServiceRotaToggleMessageResponse>();
 
+            if (id <= 0) return retorno.SetToUnprocessableEntity(ServiceConstants.IDENTIFICADOR_INVALIDO);
+
             var retornoTaskGet = ServiceRotaToggleServiceTask.Get(id);
 
             retorno.Response = MapToResponseServiceRotaToggleMessage.MapToServiceRotaToggleMessageResponse(retornoTaskGet.Result.Response);
@@ -60,7 +63,8 @@ namespace Farfetch.App.Services.Imp
         {
             var retorno = new HttpResult<ServiceRotaToggleMessageResponse>();
 
-            if (request == null) return new HttpResult<ServiceRotaToggleMessageResponse>().SetHttpStatusToNoContent();
+            if (id <= 0) return retorno.SetToUnprocessableEntity(ServiceConstants.IDENTIFICADOR_INVALIDO);
+            if (request == null) return retorno.SetHttpStatusToBadRequest();
                         
             var retornoTaskUpdate = ServiceRotaToggleServiceTask.Update(id, request.Rota);
                         
@@ -74,8 +78,7 @@ namespace Farfetch.App.Services.Imp
         {
             var retorno = new HttpResult<ServiceRotaToggleMessageResponse>();
 
-            if (id == 0)
-                return new HttpResult<ServiceRotaToggleMessageResponse>().SetHttpStatusToNoContent();
+            if (id <= 0) return retorno.SetToUnprocessableEntity(ServiceConstants.IDENTIFICADOR_INVALIDO);
 
             var retornoTaskDelete = ServiceRotaToggleServiceTask.Delete(id);
 

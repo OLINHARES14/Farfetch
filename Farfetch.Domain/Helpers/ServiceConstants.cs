@@ -6,5 +6,6 @@
         public const string AUTHORIZATION = "Authorization";
         public const string PROTOCOL = "Protocol";
         public const string ROTA = "Rota";
+        public const string IDENTIFICADOR_INVALIDO = "Identificar inválido";
     }
 }

@@ -26,7 +26,7 @@ namespace Farfetch.App.Mapper
                 Description = toggle.Description,
                 Flag = toggle.Flag,
                 Active = toggle.Active,
-                ServiceRotas = MapToModelServiceRota(toggle.ToggleServiceRotas)
+                ServiceRotas = MapToModelServiceRota.MapToList(toggle.ToggleServiceRotas)
             };
         }
     }

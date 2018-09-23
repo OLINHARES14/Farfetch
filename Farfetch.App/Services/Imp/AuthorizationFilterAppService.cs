@@ -19,11 +19,13 @@ namespace Farfetch.App.Services.Imp
         {
             var retorno = new HttpResult<AuthorizationFilterMessageResponse>();
 
-            var retornoTaskValidate = AuthorizationFilterServiceTask.Validate(rota, authorization);
+            if (string.IsNullOrEmpty(rota)) return retorno.SetToUnprocessableEntity("Rota inválida");
+            if (string.IsNullOrEmpty(authorization)) return retorno.SetHttpStatusToNotAcceptable();
 
+            var retornoTaskValidate = AuthorizationFilterServiceTask.Validate(rota, authorization);
             if (!retornoTaskValidate)
             {
-                retorno.SetToUnprocessableEntity("Acesso não permitido");
+                retorno.SetHttpStatusToUnauthorized();
             }
 
             return retorno;

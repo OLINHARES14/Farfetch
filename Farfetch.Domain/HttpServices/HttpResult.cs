@@ -8,6 +8,8 @@ namespace Farfetch.Domain.HttpServices
     [DataContract()]
     public class HttpResult<TResponseMessage> : IActionResult where TResponseMessage : class
     {
+                
+
         public HttpResult() {}
 
         [DataMember(Name = "retorno")]
@@ -35,53 +37,62 @@ namespace Farfetch.Domain.HttpServices
         /// <summary>
         /// 200 OK - Utilizado para todas as situações de sucesso.
         /// </summary>
+        /// <param name="msg"></param>
         public HttpResult<TResponseMessage> SetHttpStatusToOk(string msg = "Sucesso") => Set(HttpStatusCode.OK, msg);
 
         /// <summary>
         /// 201 Created - Utilizado para criação de registro no banco
         /// </summary>
+        /// <param name="msg"></param>
         public HttpResult<TResponseMessage> SetHttpStatusToCreated(string msg = "Criado com sucesso.") => Set(HttpStatusCode.Created, msg);
 
         /// <summary>
         /// 202 Accepted - Utilizado para chamadas async ou adicionar algum item em fila de processamento.
         /// </summary>
+        /// <param name="msg"></param>
         public HttpResult<TResponseMessage> SetHttpStatusToAccepted(string msg = "Em fila de processamento.") => Set(HttpStatusCode.Accepted, msg);
 
         /// <summary>
         /// 400 Bad Request - Utilizado para a maioria dos erros de request.
         /// <c>Campos obrigatórios no request ou erro na camada de serviço.</c>
         /// </summary>
-        public HttpResult<TResponseMessage> SetHttpStatusToBadRequest(string msg) => Set(HttpStatusCode.BadRequest, msg);
+        /// <param name="msg"></param>
+        public HttpResult<TResponseMessage> SetHttpStatusToBadRequest(string msg = "Request inválido") => Set(HttpStatusCode.BadRequest, msg);
 
         /// <summary>
         /// 500 Internal Server Error - Utilizado para erros internos no servidor ou exceptions.
         /// </summary>
+        /// <param name="msg"></param>
         public HttpResult<TResponseMessage> SetHttpStatusToInternalServerError(string msg = "Erro de comunicação.") => Set(HttpStatusCode.InternalServerError, msg);
 
         /// <summary>
         /// 403 Forbidden - Utilizado para requisições rejeitadas pelo servidor.        
         /// </summary>
+        /// <param name="msg"></param>
         public HttpResult<TResponseMessage> SetHttpStatusToForbidden(string msg = "O servidor recusou a requisição.") => Set(HttpStatusCode.Forbidden, msg);
 
         /// <summary>
         /// 404 Not Found - Utilizado para informar rota inválida.
         /// </summary>
+        /// <param name="msg"></param>
         public HttpResult<TResponseMessage> SetHttpStatusToNotFound(string msg = "Recurso não encontrado no servidor.") => Set(HttpStatusCode.NotFound, msg);
 
         /// <summary>
-        /// 503 Service Unavailable - Utilizado para informar serviço indisponível.
-        /// <c>Utilizado principalmente pelos conectores.</c>
+        /// 503 Service Unavailable - Utilizado para informar serviço indisponível.        
         /// </summary>
+        /// <param name="msg"></param>
         public HttpResult<TResponseMessage> SetHttpStatusToServiceUnavailable(string msg = "Serviço indisponível.") => Set(HttpStatusCode.ServiceUnavailable, msg);
 
         /// <summary>
         /// 401 Unauthorized - Utilizado para token inválido ou restrição de acesso.
         /// </summary>
+        /// <param name="msg"></param>
         public HttpResult<TResponseMessage> SetHttpStatusToUnauthorized(string msg = "Não autorizado o acesso ao recurso.") => Set(HttpStatusCode.Unauthorized, msg);
 
         /// <summary>
         /// 406 NotAcceptable - Utilizado para informar que existe informações que devem ser passadas no header.         
         /// </summary>    
+        /// <param name="msg"></param>
         public HttpResult<TResponseMessage> SetHttpStatusToNotAcceptable(string msg = "Informação Authorization no header é obrigatório.") => Set(HttpStatusCode.NotAcceptable, msg);
 
         /// <summary>

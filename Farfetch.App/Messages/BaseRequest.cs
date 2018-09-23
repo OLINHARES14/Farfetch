@@ -37,7 +37,7 @@ namespace Farfetch.App.Messages
         /// Obtem valor do header a partir de uma chave.
         /// </summary>
         /// <param name="key">Chave que identifica o valor no header</param>
-        /// <returns>Valor do header a partrir da chave passada</returns>
+        /// <returns>Valor do header a partir da chave passada</returns>
         public virtual string GetHeader(string key) => DefaultRequestHeaders.TryGetValue(key, out string outValue) ? outValue : string.Empty;        
     }
 }
