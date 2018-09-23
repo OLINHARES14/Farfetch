@@ -3,7 +3,6 @@ using Farfetch.App.Services.Contracts;
 using Farfetch.Domain.HttpServices;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Web.Filters;
 
 namespace Web.Controllers
 {
