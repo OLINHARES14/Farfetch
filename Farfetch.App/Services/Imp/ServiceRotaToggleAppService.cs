@@ -66,7 +66,7 @@ namespace Farfetch.App.Services.Imp
             if (id <= 0) return retorno.SetToUnprocessableEntity(ServiceConstants.IDENTIFICADOR_INVALIDO);
             if (request == null) return retorno.SetHttpStatusToBadRequest();
                         
-            var retornoTaskUpdate = ServiceRotaToggleServiceTask.Update(id, request.Rota);
+            var retornoTaskUpdate = ServiceRotaToggleServiceTask.Update(id, request.Rota, request.ToggleId);
                         
             retorno.Response = MapToResponseServiceRotaToggleMessage.MapToServiceRotaToggleMessageResponse(retornoTaskUpdate.Result.Response);
             retorno.Message = retornoTaskUpdate.Result.Message;

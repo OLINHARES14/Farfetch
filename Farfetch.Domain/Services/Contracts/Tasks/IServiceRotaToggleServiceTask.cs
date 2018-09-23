@@ -13,7 +13,7 @@ namespace Farfetch.Domain.Services.Contracts.Tasks
 
         Task<HttpResult<ServiceRotaToggle>> Get(int id);
 
-        Task<HttpResult<ServiceRotaToggle>> Update(int id, string rota);
+        Task<HttpResult<ServiceRotaToggle>> Update(int id, string rota, int toggleId);
 
         Task<HttpResult<ServiceRotaToggle>> Delete(int id);
     }

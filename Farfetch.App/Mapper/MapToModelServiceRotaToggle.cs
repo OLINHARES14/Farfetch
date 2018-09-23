@@ -11,6 +11,7 @@ namespace Farfetch.App.Mapper
 
             return new ServiceRotaToggle
             {
+                Rota = request.Rota,
                 Active = true,
             };
         }

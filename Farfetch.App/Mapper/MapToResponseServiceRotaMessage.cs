@@ -6,6 +6,16 @@ namespace Farfetch.App.Mapper
 {
     public class MapToResponseServiceRotaMessage
     {
+        public static List<ServiceRotaMessageResponse> MapToListServiceRotaMessageResponse(List<ToggleServiceRota> toggleServiceRotas)
+        {
+            var lista = new List<ServiceRotaMessageResponse>();
+
+            foreach (var item in toggleServiceRotas)
+                lista.Add(MapToServiceRotaMessageResponse(item.ServiceRota));
+
+            return lista;
+        }
+
         public static List<ServiceRotaMessageResponse> MapToListServiceRotaMessageResponse(List<ServiceRota> serviceRotas)
         {
             var lista = new List<ServiceRotaMessageResponse>();

@@ -1,6 +1,7 @@
 ﻿using Farfetch.App.Messages;
 using Farfetch.Domain.Models.Entities;
 using Farfetch.Infra.Cross.Helpers;
+using System;
 using System.Collections.Generic;
 
 namespace Farfetch.App.Mapper
@@ -35,8 +36,8 @@ namespace Farfetch.App.Mapper
             if (request == null) return new ServiceRota();
 
             return new ServiceRota
-            {   
-                Authorization = request.GetHeader(ServiceConstants.AUTHORIZATION),
+            {
+                Authorization = Guid.NewGuid().ToString(),
                 Rota = request.Rota,
                 Active = true                
             };

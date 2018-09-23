@@ -14,11 +14,11 @@ namespace Farfetch.Infra.Data.Imp.Repositories
         public ToggleRepository(DbContextFarfetch context) : base(context) { }
 
         public async Task<List<Toggle>> GetAll() => await Context.Toggle
-                .Include(it => it.ToggleServiceRotas)
+                .Include(it => it.ToggleServiceRotas).ThenInclude(t => t.ServiceRota)
             .ToListAsync();
 
         public async Task<Toggle> Get(int id) => await Context.Toggle.Where(x => x.Id == id)
-                .Include(it => it.ToggleServiceRotas)
+                .Include(it => it.ToggleServiceRotas).ThenInclude(t => t.ServiceRota)
             .FirstOrDefaultAsync();
     }
 }

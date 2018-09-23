@@ -72,13 +72,17 @@ namespace Farfetch.Domain.Services.Imp.Tasks
             return retorno;
         }
 
-        public async Task<HttpResult<ServiceRotaToggle>> Update(int id, string rota)
+        public async Task<HttpResult<ServiceRotaToggle>> Update(int id, string rota, int toggleId)
         {
             var retorno = new HttpResult<ServiceRotaToggle>();
 
             var retornoServiceRotaToggleGet = await ServiceRotaToggleEntityService.Get(id);
             if (retornoServiceRotaToggleGet == null) return retorno.SetHttpStatusToNotFound();
 
+            var retornoToggleGet = ToggleEntityService.Get(toggleId);
+            if (retornoToggleGet == null) return retorno.SetHttpStatusToNotFound();
+
+            retornoServiceRotaToggleGet.Toggle = retornoToggleGet.Result;
             retornoServiceRotaToggleGet.Rota = rota;
 
             _dbContext.SaveChanges();

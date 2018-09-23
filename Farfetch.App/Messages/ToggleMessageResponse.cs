@@ -20,6 +20,6 @@ namespace Farfetch.App.Messages
         public bool Active { get; set; }
 
         [DataMember(Name = "serviceRotas")]
-        public List<ServiceRota> ServiceRotas { get; set; }
+        public List<ServiceRotaMessageResponse> ServiceRotas { get; set; }
     }
 }

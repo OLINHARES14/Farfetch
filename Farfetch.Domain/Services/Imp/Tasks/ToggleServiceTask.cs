@@ -88,12 +88,16 @@ namespace Farfetch.Domain.Services.Imp.Tasks
             retornoToggleGet.Description = description;
             retornoToggleGet.Flag = flag;
 
+            if (idsServiceRota != null && idsServiceRota.Count > 0)
+            {
+                retornoToggleGet.ToggleServiceRotas = null;
+                retornoToggleGet.ToggleServiceRotas = new List<ToggleServiceRota>();
+            }
+
             foreach (var idServiceRota in idsServiceRota)
             {
                 var retornoServiceRotaGet = ServiceRotaEntityService.Get(idServiceRota);
                 if (retornoServiceRotaGet == null) return retorno.SetHttpStatusToNotFound();
-
-                retornoToggleGet.ToggleServiceRotas = null;
 
                 var toggleServiceRota = new ToggleServiceRota();
                 toggleServiceRota.ServiceRota = retornoServiceRotaGet.Result;
