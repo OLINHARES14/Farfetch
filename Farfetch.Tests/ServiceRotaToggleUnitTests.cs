@@ -7,53 +7,52 @@ using Farfetch.Tests.ModelTests;
 using FluentAssertions;
 using NSubstitute;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace Farfetch.Tests
 {
-    public class ToggleUnitTests
+    public class ServiceRotaToggleUnitTests
     {        
         private IUnitOfWork UnitOfWork { get; }
+        private IServiceRotaToggleEntityService ServiceRotaToggleEntityService { get; }
         private IToggleEntityService ToggleEntityService { get; }
-        private IServiceRotaEntityService ServiceRotaEntityService { get; }
 
-        ToggleServiceTask task;
+        ServiceRotaToggleServiceTask task;
 
-        public ToggleUnitTests()
+        public ServiceRotaToggleUnitTests()
         {
             UnitOfWork = Substitute.For<IUnitOfWork>();
+            ServiceRotaToggleEntityService = Substitute.For<IServiceRotaToggleEntityService>();
             ToggleEntityService = Substitute.For<IToggleEntityService>();
-            ServiceRotaEntityService = Substitute.For<IServiceRotaEntityService>();
 
-            task = new ToggleServiceTask(UnitOfWork, ToggleEntityService, ServiceRotaEntityService);
+            task = new ServiceRotaToggleServiceTask(UnitOfWork, ToggleEntityService, ServiceRotaToggleEntityService);
         }
 
         #region [ Tasks ]
 
-        private HttpResult<Toggle> Create(Toggle toggle, List<int> idsServiceRota)
+        private HttpResult<ServiceRotaToggle> Create(ServiceRotaToggle serviceRotaToggle, int toggleId)
         {   
-            return task.Create(toggle, idsServiceRota);
+            return task.Create(serviceRotaToggle, toggleId);
         }
 
-        private Task<HttpResult<List<Toggle>>> GetAll()
+        private Task<HttpResult<List<ServiceRotaToggle>>> GetAll()
         {
             return task.GetAll();
         }
 
-        private Task<HttpResult<Toggle>> Get(int id)
+        private Task<HttpResult<ServiceRotaToggle>> Get(int id)
         {
             return task.Get(id);
         }
 
-        private Task<HttpResult<Toggle>> Update(int id, string description, bool flag, List<int> idsServiceRota)
+        private Task<HttpResult<ServiceRotaToggle>> Update(int id, string rota, int toggleId)
         {
-            return task.Update(id, description, flag, idsServiceRota);
+            return task.Update(id, rota, toggleId);
         }
 
-        private Task<HttpResult<Toggle>> Delete(int id)
+        private Task<HttpResult<ServiceRotaToggle>> Delete(int id)
         {
             return task.Delete(id);
         }
@@ -63,16 +62,14 @@ namespace Farfetch.Tests
         #region [ Cenarios ]
 
         [Fact]
-        public Toggle Create_valido()
+        public ServiceRotaToggle Create_valido()
         {
             var toggleMock = ToggleMock.ToggleValido();
-            toggleMock.Id = 0;
+            var serviceRotaToggleMock = ServiceRotaToggleMock.ServiceRotaToggleValido();
+            serviceRotaToggleMock.Id = 0;
 
-            var listaIdsServiceRotaMock = new List<int>();
-            listaIdsServiceRotaMock.Add(ToggleServiceRotaMock.ToggleServiceRotaValido().Id);
-
-            var retorno = Create(toggleMock, listaIdsServiceRotaMock);
-
+            var retorno = Create(serviceRotaToggleMock, toggleMock.Id);
+                        
             Assert.Equal(HttpStatusCode.Created, retorno.HttpStatusCode);
 
             return retorno.Response;
@@ -85,7 +82,7 @@ namespace Farfetch.Tests
 
             Assert.Equal(HttpStatusCode.OK, retorno.Result.HttpStatusCode);
         }
-
+        
         [Fact]
         public void Get_invalido_id_zero()
         {
@@ -97,16 +94,15 @@ namespace Farfetch.Tests
         [Fact]
         public void Update_invalido_id_zero()
         {
-            var toggle = Create_valido();
+            var serviceRotaToggle = Create_valido();
 
-            var listaIdsServiceRotaMock = new List<int>();
-            listaIdsServiceRotaMock.Add(toggle.ToggleServiceRotas.FirstOrDefault().Id);
+            var toggleMock = ToggleMock.ToggleValido();
 
-            var retorno = Update(0, toggle.Description, toggle.Flag, listaIdsServiceRotaMock);
+            var retorno = Update(0, serviceRotaToggle.Rota, toggleMock.Id);
 
             Assert.Equal(HttpStatusCode.NotFound, retorno.Result.HttpStatusCode);
         }
-
+        
         [Fact]
         public void Delete_invalido_id_zero()
         {
