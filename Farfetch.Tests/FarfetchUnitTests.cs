@@ -3,10 +3,11 @@ using Farfetch.Domain.Models.Entities;
 using Farfetch.Domain.Services.Contracts.Entities;
 using Farfetch.Domain.Services.Contracts.Infra.Data.UoW;
 using Farfetch.Domain.Services.Imp.Tasks;
+using Farfetch.Tests.ModelTests;
 using FluentAssertions;
 using NSubstitute;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Xunit;
@@ -32,9 +33,9 @@ namespace Farfetch.Tests
 
         #region [ Tasks ]
 
-        private HttpResult<Toggle> Create(Toggle toggle)
+        private HttpResult<Toggle> Create(Toggle toggle, List<int> idsServiceRota)
         {   
-            return task.Create(toggle, null); //TODO: Verificar Ids
+            return task.Create(toggle, idsServiceRota);
         }
 
         private Task<HttpResult<List<Toggle>>> GetAll()
@@ -47,9 +48,9 @@ namespace Farfetch.Tests
             return task.Get(id);
         }
 
-        private Task<HttpResult<Toggle>> Update(int id, string description, bool flag)
+        private Task<HttpResult<Toggle>> Update(int id, string description, bool flag, List<int> idsServiceRota)
         {
-            return task.Update(id, description, flag, null); ; //TODO: Verificar Ids
+            return task.Update(id, description, flag, idsServiceRota);
         }
 
         private Task<HttpResult<Toggle>> Delete(int id)
@@ -64,8 +65,13 @@ namespace Farfetch.Tests
         [Fact]
         public Toggle Create_valido()
         {
-            var toggleMock = ModelTests.Models.MockToggleValido();
-            var retorno = Create(toggleMock);
+            var toggleMock = ToggleMock.ToggleValido();
+            toggleMock.Id = 0;
+
+            var listaIdsServiceRotaMock = new List<int>();
+            listaIdsServiceRotaMock.Add(ToggleServiceRotaMock.ToggleServiceRotaValido().Id);
+
+            var retorno = Create(toggleMock, listaIdsServiceRotaMock);
 
             retorno.HttpStatusCode.Should().Equals(HttpStatusCode.Created);
 
@@ -95,7 +101,7 @@ namespace Farfetch.Tests
         {
             var retorno = Get(0);
 
-            retorno.Result.HttpStatusCode.Should().Equals(HttpStatusCode.NotFound);
+            retorno.Result.HttpStatusCode.Should().Equals((HttpStatusCode)422);
         }
 
         [Fact]
@@ -103,7 +109,10 @@ namespace Farfetch.Tests
         {
             var toggle = Create_valido();
 
-            var retorno = Update(toggle.Id, toggle.Description, toggle.Flag);
+            var listaIdsServiceRotaMock = new List<int>();
+            listaIdsServiceRotaMock.Add(toggle.ToggleServiceRotas.FirstOrDefault().Id);
+
+            var retorno = Update(toggle.Id, toggle.Description, toggle.Flag, listaIdsServiceRotaMock);
 
             retorno.Result.HttpStatusCode.Should().Equals(HttpStatusCode.OK);
         }
@@ -113,9 +122,12 @@ namespace Farfetch.Tests
         {
             var toggle = Create_valido();
 
-            var retorno = Update(0, toggle.Description, toggle.Flag);
+            var listaIdsServiceRotaMock = new List<int>();
+            listaIdsServiceRotaMock.Add(toggle.ToggleServiceRotas.FirstOrDefault().Id);
 
-            retorno.Result.HttpStatusCode.Should().Equals(HttpStatusCode.NotFound);
+            var retorno = Update(0, toggle.Description, toggle.Flag, listaIdsServiceRotaMock);
+
+            retorno.Result.HttpStatusCode.Should().Equals((HttpStatusCode)422);
         }
 
         [Fact]
@@ -125,7 +137,7 @@ namespace Farfetch.Tests
 
             var retorno = Delete(toggle.Id);
 
-            retorno.Result.HttpStatusCode.Should().Equals((HttpStatusCode)204);
+            retorno.Result.HttpStatusCode.Should().Equals(HttpStatusCode.OK);
         }
 
         [Fact]
@@ -133,7 +145,7 @@ namespace Farfetch.Tests
         {
             var retorno = Delete(0);
 
-            retorno.Result.HttpStatusCode.Should().Equals(HttpStatusCode.NotFound);
+            retorno.Result.HttpStatusCode.Should().Equals((HttpStatusCode)422);
         }
 
         #endregion
