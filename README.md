@@ -47,11 +47,11 @@ no banco de dados,  tendo assim um único ponto de configuração a ser feito.
 3- Utilizar ferramenta para executar APIs, uma indicação é usar o 'Postman'
 
 4- Procurar na documentação abaixo a API de rota '/api/order/register' e executar passando o Header com 'Authorization' referente a 'ServiceRota' que deseja fazer o 'register'.
-	A- No primeiro momento a API de rota '/api/order/register', está configurada para o toggle Description: 'IsButtonTrue' e Flag: '1' (true), que está configurado para ser utilizado para qualquer chamada de 'Authorization' referente a 'ServiceRota'.
-	B- Experimente alterar por API de Update o 'Toggle' da 'ServiceRotaToggle' para o toggle Description: 'IsButtonTrue' e Flag: '0' (false) 
-	C- Fazendo um novo chamado a API de rota '/api/order/register' com o 'Authorization' da 'ServiceRota' da rota igual '/api/service/a' NÃO SERÁ mais possível realizar um novo 'register' na tabela.
-	D- Fazendo um novo chamado a API de rota '/api/order/register' com o 'Authorization' da 'ServiceRota' da rota igual '/api/service/abc' SERÁ possível realizar um novo 'register' na tabela.
-	E- Pode realizar a consulta a API ' /api/order/register' com o verbo 'GET' para consultar todos os 'register' já incluídos.
+   A- No primeiro momento a API de rota '/api/order/register', está configurada para o toggle Description: 'IsButtonTrue' e Flag: '1' (true), que está configurado para ser utilizado para qualquer chamada de 'Authorization' referente a 'ServiceRota'.
+   B- Experimente alterar por API de Update o 'Toggle' da 'ServiceRotaToggle' para o toggle Description: 'IsButtonTrue' e Flag: '0' (false) 
+   C- Fazendo um novo chamado a API de rota '/api/order/register' com o 'Authorization' da 'ServiceRota' da rota igual '/api/service/a' NÃO SERÁ mais possível realizar um novo 'register' na tabela.
+  D- Fazendo um novo chamado a API de rota '/api/order/register' com o 'Authorization' da 'ServiceRota' da rota igual '/api/service/abc' SERÁ possível realizar um novo 'register' na tabela.
+  E- Pode realizar a consulta a API ' /api/order/register' com o verbo 'GET' para consultar todos os 'register' já incluídos.
 
 5- Agora será apenas decidir qual será as rotas permitidas por 'Toggle' e configurar a mesma no 'ServiceRotaToggle'.
 
@@ -69,12 +69,12 @@ Boa sorte.
 
 # Base de dados
 - Base de dados consta as seguintes tabelas:
-	- Toggle (Cadastramento dos flags)
-	- ServiceRota (Cadastramento das rotas que utilizam as apis com 'Toggle')
-	- ToggleServiceRota (Relacionamento de permissão das 'ServiceRota' por 'Toggle')
-		Obs. Se um Toggle não tiver relacionamento algum na tabela 'ToggleServiceRota' isso quer dizer que a rota associado a esse 'Toggle' deixará livre o acesso a qualquer rota que desejar utilizar o serviço.
-	- ServiceRotaToggle (Cadastramento das rotas que utilizam o 'Toggle')
-	- Order (Registro de quais serviços conseguiram passar pela 'ServiceRotaToggle')
+     - Toggle (Cadastramento dos flags)
+     - ServiceRota (Cadastramento das rotas que utilizam as apis com 'Toggle')
+     - ToggleServiceRota (Relacionamento de permissão das 'ServiceRota' por 'Toggle')
+       Obs. Se um Toggle não tiver relacionamento algum na tabela 'ToggleServiceRota' isso quer dizer que a rota associado a esse 'Toggle' deixará livre o acesso a qualquer rota que desejar utilizar o serviço.
+     - ServiceRotaToggle (Cadastramento das rotas que utilizam o 'Toggle')
+     - Order (Registro de quais serviços conseguiram passar pela 'ServiceRotaToggle')
 - Criado um seed para alimentar a base com os dados referente ao desafio
 
 # Chamada API
