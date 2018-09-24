@@ -30,17 +30,17 @@ no banco de dados,  tendo assim um único ponto de configuração a ser feito.
 # Primeiros passos
 1- Começaremos gerando o banco de dados e para isso utilizaremos a técnica migrations.
 
-A- Utilizar o console para podermos aplicar os comandos 
-Abrir - Console do Gerenciador de Pacotes
+	A- Utilizar o console para podermos aplicar os comandos 
+	Abrir - Console do Gerenciador de Pacotes
 
-B- Necessário selecionar o projeto abaixo para executar os comandos do migration
-Selecionar - 4.Infra\Farfetch.Infra
+	B- Necessário selecionar o projeto abaixo para executar os comandos do migration
+	Selecionar - 4.Infra\Farfetch.Infra
 
-C- Gerar os scripts
-Add-Migration "Nome que desejar"
+	C- Gerar os scripts
+	Add-Migration "Nome que desejar"
 
-D- Executar scripts no banco de dados
-Update-Database
+	D- Executar scripts no banco de dados
+	Update-Database
 	
 2- Executar o projeto
     Será aplicado um script de carga no banco de dados de forma automática para que seja representado o ambiente proposto no desafio 'ToggleService'.
@@ -49,15 +49,15 @@ Update-Database
 
 4- Procurar na documentação abaixo a API de rota '/api/order/register' e executar passando o Header com 'Authorization' referente a 'ServiceRota' que deseja fazer o 'register'.
 
-  A- No primeiro momento a API de rota '/api/order/register', está configurada para o toggle Description: 'IsButtonTrue' e Flag: '1' (true), que está configurado para ser utilizado para qualquer chamada de 'Authorization' referente a 'ServiceRota'.
+  	A- No primeiro momento a API de rota '/api/order/register', está configurada para o toggle Description: 'IsButtonTrue' e Flag: '1' (true), que está configurado para ser utilizado para qualquer chamada de 'Authorization' referente a 'ServiceRota'.
    
-  B- Experimente alterar por API de Update o 'Toggle' da 'ServiceRotaToggle' para o toggle Description: 'IsButtonTrue' e Flag: '0' (false) 
+  	B- Experimente alterar por API de Update o 'Toggle' da 'ServiceRotaToggle' para o toggle Description: 'IsButtonTrue' e Flag: '0' (false) 
    
-  C- Fazendo um novo chamado a API de rota '/api/order/register' com o 'Authorization' da 'ServiceRota' da rota igual '/api/service/a' NÃO SERÁ mais possível realizar um novo 'register' na tabela.
+  	C- Fazendo um novo chamado a API de rota '/api/order/register' com o 'Authorization' da 'ServiceRota' da rota igual '/api/service/a' NÃO SERÁ mais possível realizar um novo 'register' na tabela.
   
-  D- Fazendo um novo chamado a API de rota '/api/order/register' com o 'Authorization' da 'ServiceRota' da rota igual '/api/service/abc' SERÁ possível realizar um novo 'register' na tabela.
+  	D- Fazendo um novo chamado a API de rota '/api/order/register' com o 'Authorization' da 'ServiceRota' da rota igual '/api/service/abc' SERÁ possível realizar um novo 'register' na tabela.
   
-  E- Pode realizar a consulta a API ' /api/order/register' com o verbo 'GET' para consultar todos os 'register' já incluídos.
+  	E- Pode realizar a consulta a API ' /api/order/register' com o verbo 'GET' para consultar todos os 'register' já incluídos.
 
 5- Agora será apenas decidir qual será as rotas permitidas por 'Toggle' e configurar a mesma no 'ServiceRotaToggle'.
 
